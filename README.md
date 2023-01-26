@@ -77,7 +77,7 @@ The Trello would have a weekly task and they would be updated everytime a task i
 
 Duration: 01/09/2023 - 01/20/2023
 
-#### Completed Tasks: 
+#### Completed Tasks:  
 
 1. Project Plan
 2. Initial draft of the report
