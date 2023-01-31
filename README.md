@@ -72,9 +72,9 @@ We have used AGILE methodology to divide the project into 5 sprints. Currently w
 
 The Trello would have a weekly task and they would be updated everytime a task is completed. 
 
-## How to Run and test this microservice
+## How to Run and test the login signup microservice
 
-1. Clone this repository
+1. Clone the login_signup_microservice repository
 2. Go to terminal and make sure you are the right repository
 3. Run command "npm install"
 4. After everthing is installed run command "npm start"
