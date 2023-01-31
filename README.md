@@ -25,7 +25,7 @@ Instructor(s):
 | Date       |   Version     |            Description                   |
 |------------|:-------------:|-----------------------------------------:|
 | 01/19/2023 |  0.0          |            Init draft                    |
-| 01/31/2023 |  0.1          |  How to run and test this microservice   |
+| 01/31/2023 |  1.0          |  How to run and test this microservice   |
 
 
 # Project Management Information
