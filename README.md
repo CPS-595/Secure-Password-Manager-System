@@ -22,9 +22,12 @@ Instructor(s):
 
 ## Revision History
 
-| Date       |   Version     |  Description |
-|------------|:-------------:|-------------:|
-| 01/19/2023 |  0.0          | Init draft   |
+| Date       |   Version     |            Description                   |
+|------------|:-------------:|-----------------------------------------:|
+| 01/19/2023 |  0.0          |            Init draft                    |
+|------------|:-------------:|-----------------------------------------:|
+| 01/31/2023 |  0.1          |  How to run and test this microservice   |
+
 
 # Project Management Information
 
@@ -70,17 +73,26 @@ We have used AGILE methodology to divide the project into 5 sprints. Currently w
 
 The Trello would have a weekly task and they would be updated everytime a task is completed. 
 
+## How to Run and test this microservice
+
+1. Clone this repository
+2. Go to terminal and make sure you are the right repository
+3. Run command "npm install"
+4. After everthing is installed run command "npm start"
+
 
 ## Scrum process
 
 ### Sprint 0
 
-Duration: 01/09/2023 - 01/20/2023
+Duration: 01/09/2023 - 02/4/2023
 
 #### Completed Tasks:  
 
 1. Project Plan
 2. Initial draft of the report
+3. Created microservice for login and signup
+4. Created MongoDB database and tested the data insertion via microservice
 
 
 
