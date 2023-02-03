@@ -38,6 +38,8 @@ Source code repository (private access): <https://github.com/CPS-595/Secure-Pass
 
 
 # Overview
+ 
+The idea is to build a secure password manager that securely stores and share the crucial credentials of the company that every employee needs.
 
 Every person or organization has multiple accounts over various web platforms like Gmail, MongoDB, Facebook or even their wifi password. Remembering all the passwords across different platforms can be a problem especially when it comes to organizations as they need to share passwords among team members. The intended password manager system would allow team members to store and share credentials securely. For instance, the wifi password of your office, the administrator password of a router, or your organization's social media account password. It leverages encryption and decryption algorithms to encrypt and decrypt the secrets using public and private keys. This system would be implemented using a website to manage the passwords and a Chrome extension to store the private key on the browser and interact with the website to do the decryption.
 
@@ -77,13 +79,18 @@ The Trello would have a weekly task and they would be updated everytime a task i
 1. Make sure you have git installed via <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>
 2. Install node js for your Operating system by following the instructions on this link :<https://nodejs.org/en/download/package-manager>
 3. Clone the login_signup_microservice repository <https://github.com/CPS-595/login_signup_microservice> and Secure Password Manager repository: <https://github.com/CPS-595/Secure-Password-Manager-System> by copying the link one by one.
+
 <img width="1420" alt="Screenshot 2023-02-03 at 3 25 02 PM" src="https://user-images.githubusercontent.com/46633374/216703697-324f3102-fea1-4834-b21d-bc5b6ca9139c.png">
-4. Go to the cloned repository by entering "cd" followed by the path where you cloned the repository
+4. Go to the cloned repository by entering "cd" followed by the path where you cloned the repository.
 <img width="567" alt="Screenshot 2023-02-03 at 3 31 15 PM" src="https://user-images.githubusercontent.com/46633374/216704997-8aeeb140-e4da-4eb9-a4ff-93054b982154.png">
-5. Install all the dependencies via "npm install" command<img width="566" alt="Screenshot 2023-02-03 at 3 33 39 PM" src="https://user-images.githubusercontent.com/46633374/216705517-9e5704ca-df48-4cb3-9c43-b38041c955f3.png">
+
+5. Install all the dependencies via "npm install" command.
+
+<img width="566" alt="Screenshot 2023-02-03 at 3 33 39 PM" src="https://user-images.githubusercontent.com/46633374/216705517-9e5704ca-df48-4cb3-9c43-b38041c955f3.png">
+
 6. Do step 4 & 5 for the Secure-password-Manager-System Repository as well.
-7. Go the both repostories and enter command "npm start"
-8. Go https://localhost:3000 for the access the wesbite
+7. Go the both repostories and enter command "npm start".
+8. Go https://localhost:3000 to access the wesbite.
 
 
 
