@@ -174,7 +174,7 @@ export default function App() {
   ) : (
     <ThemeProvider theme={darkMode ? themeDark : theme}>
       <CssBaseline />
-      {layout === "dashboard" && (
+      {/* layout === "dashboard" && (
         <>
           <Sidenav
             color={sidenavColor}
@@ -187,7 +187,7 @@ export default function App() {
           <Configurator />
           {configsButton}
         </>
-      )}
+      ) */}
       {layout === "vr" && <Configurator />}
       <Routes>
         {getRoutes(routes)}

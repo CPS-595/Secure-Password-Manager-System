@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
 import { useState } from "react";
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link, Navigate, Routes, Route } from "react-router-dom";
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -40,6 +40,8 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+import axios from "axios";
+// import { Redirect } from 'react-router';
 
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
@@ -47,6 +49,7 @@ function Basic() {
   const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
@@ -61,6 +64,22 @@ function Basic() {
       setPasswordError("Password cannot be less than 6 characters!");
     } else if (password.length > 30) {
       setPasswordError("Password cannot be greater than 30 characters!");
+    } else {
+      console.log("email", email);
+      console.log("password", password);
+      axios.post(`http://localhost:8081/login`, { email, password }).then((res) => {
+        console.log(res);
+        console.log(res.data);
+        if (res.data.status === "authentication-failed") {
+          setEmailError(res.data.message);
+        } else {
+          setLoggedIn(true);
+          console.log("login successfull!");
+          // history.push('/dashboard');
+          // const navigate = useNavigate();
+          // navigate("/dashboard");
+        }
+      });
     }
   };
 
@@ -77,6 +96,14 @@ function Basic() {
       setPasswordError("");
     }
   };
+
+  if (loggedIn) {
+    return (
+      <Routes>
+        <Route path="*" element={<Navigate to="/dashboard" />} />
+      </Routes>
+    );
+  }
 
   return (
     <BasicLayout image={bgImage}>
