@@ -68,11 +68,13 @@ The prototype has been made and currently the main website is being built on it 
 
 ![Client UI Dataflow drawio (1) (1)](https://user-images.githubusercontent.com/46633374/218194429-b06a08cd-7303-465f-98ee-f0e45c64df4e.png)
 
+                       User interaction with the website
 ## Sequence Diagram
 
 ![Authorization Dataflow drawio (1)](https://user-images.githubusercontent.com/46633374/218194491-c5f61d6d-ec31-4fb7-9c93-99f68191bcf8.png)
 
 
+                     How authentication works for different cases
 # Impacts
 
 So far we have planned to use MERN stack (MongoDB, Express, React, NodeJS) to develop this project. So far the project is not completely developed to determine its impacts.
