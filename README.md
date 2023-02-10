@@ -26,7 +26,7 @@ Instructor(s):
 |------------|:-------------:|--------------------------------------------:|
 | 01/19/2023 |  0.0          |            Init draft                       |
 | 01/31/2023 |  0.5          |  How to run and test this microservice      |
-| 02/10/2023 |  1.0          |  Updated with sse case and Sequence Diagram |
+| 02/10/2023 |  1.0          |  Updated with use case and Sequence Diagram |
 
 
 # Project Management Information
