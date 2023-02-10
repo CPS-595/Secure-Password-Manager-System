@@ -23,9 +23,10 @@ Instructor(s):
 ## Revision History
 
 | Date       |   Version     |            Description                   |
-|------------|:-------------:|-----------------------------------------:|
-| 01/19/2023 |  0.0          |            Init draft                    |
-| 01/31/2023 |  1.0          |  How to run and test this microservice   |
+|------------|:-------------:|--------------------------------------------:|
+| 01/19/2023 |  0.0          |            Init draft                       |
+| 01/31/2023 |  0.5          |  How to run and test this microservice      |
+| 02/10/2023 |  1.0          |  Updated with sse case and Sequence Diagram |
 
 
 # Project Management Information
@@ -39,7 +40,7 @@ Source code repository (private access): <https://github.com/CPS-595/Secure-Pass
 
 # Overview
  
-The idea is to build a secure password manager that securely stores and share the crucial credentials of the company that every employee needs.
+The idea is to build a secure password manager that securely generate, stores and share the crucial credentials of the company. This project is based on passbolt which is an existing Password manager used currently being used by NOVOBI.
 
 Every person or organization has multiple accounts over various web platforms like Gmail, MongoDB, Facebook or even their wifi password. Remembering all the passwords across different platforms can be a problem especially when it comes to organizations as they need to share passwords among team members. The intended password manager system would allow team members to store and share credentials securely. For instance, the wifi password of your office, the administrator password of a router, or your organization's social media account password. It leverages encryption and decryption algorithms to encrypt and decrypt the secrets using public and private keys. This system would be implemented using a website to manage the passwords and a Chrome extension to store the private key on the browser and interact with the website to do the decryption.
 
@@ -48,29 +49,39 @@ Every person or organization has multiple accounts over various web platforms li
 
 The project was introducted to us by Novobi, a Software Company in Texas but the reason why we chose to work on this project was that whenever we used to enter credentials to any website, google chrome used to ask us "Do you want to save your credentials?" and once you save your credentials you can direclty just click on the password section and the password was autofilled by the chrome. We often wondered if we could work on building something like this and that when we though of building this project.
 
-So far the project is in its initial pre-development stage Sprint 0 and the requirements for the project are yet to be discussed with the client. Within the next few weeks we will be working on a prototype for this after discussing with the client.
+So far the project is in its development stage Sprint 1. So far we have built a website along with database connectivity to store credentials.Futhermore, we are working on securely storing the password in Database by encrypting it and also we are trying to use passphrase for authentication. For session management we are using AWT tokens. 
 
 
 
 # System Analysis
 
-A rough design of the website that we planned to build will include a portal that will allow the user to add a chrome extension on the user browser which will generate and store the private key.
+A rough design of the website that we planned to build will include a portal that will allow the user to add a chrome extension on the user browser which will generate and store the private key. Anytime the password needs to be reveal or store the public key would be used to encrypt the password and store in the database while private would be used to decrypt and reveal the password. 
+
+Everytime the user is comes back to the portal or the browser after few minutes if inactivity, the user will be asked to enter the passphrase which he stored after logging in.
 
 
 ## High-level Requirements
 
-A prototype of the website that would show some basic functionality like managing registeration, a database to store user data.
+The prototype has been made and currently the main website is being built on it it so far the we are working on the authentication part but in the coming sprints we would be using building an extension to enable encryption and decrpytion via  public and private keys.
+
+## Use Case Diagram
+
+![Client UI Dataflow drawio (1) (1)](https://user-images.githubusercontent.com/46633374/218194429-b06a08cd-7303-465f-98ee-f0e45c64df4e.png)
+
+## Sequence Diagram
+
+![Authorization Dataflow drawio (1)](https://user-images.githubusercontent.com/46633374/218194491-c5f61d6d-ec31-4fb7-9c93-99f68191bcf8.png)
 
 
 # Impacts
 
-So far we have planned to use MEAN stack (MongoDB, Express, Angular, NodeJS) to develop this project but after a final plan and clear use cases, we will be able to understand its impacts.
+So far we have planned to use MERN stack (MongoDB, Express, React, NodeJS) to develop this project. So far the project is not completely developed to determine its impacts.
 
 
 # Software Process Management
 
 
-We have used AGILE methodology to divide the project into 5 sprints. Currently we are in the Pre-Development Stage sprint 0.
+We have used AGILE methodology to divide the project into 5 sprints. Currently we are in the Development Stage sprint 1.
 
 The Trello would have a weekly task and they would be updated everytime a task is completed. 
 
@@ -106,6 +117,16 @@ Duration: 01/09/2023 - 02/4/2023
 2. Initial draft of the report
 3. Created microservice for login and signup
 4. Created MongoDB database and tested the data insertion via microservice
+5. Website Prototype and client approval
 
 
+### Sprint 1
+
+Duration: 02/05/2023 - 03/11/2023
+
+#### Completed Tasks:  
+
+1. FrontEnd and Backend integration
+2. Passphrase prototype
+3. Encrypting password storage in database
 
