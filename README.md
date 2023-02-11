@@ -33,14 +33,14 @@ Instructor(s):
 
 Management board (private access): <https://trello.com/w/secure_password_manager_system>
 
-Source code repository (private access): <https://github.com/CPS-595/Secure-Password-Manager-System>
+Source code for Frontend (private access): <https://github.com/CPS-595/Secure-Password-Manager-System>
 
-
+Source code for Backend (private access): <https://github.com/CPS-595/login_signup_microservice>
 
 
 # Overview
  
-The idea is to build a secure password manager that securely generate, stores and share the crucial credentials of the company. This project is based on passbolt which is an existing Password manager used currently being used by NOVOBI.
+The idea is to build a secure web application where users can store and share their passwords for different urls.
 
 Every person or organization has multiple accounts over various web platforms like Gmail, MongoDB, Facebook or even their wifi password. Remembering all the passwords across different platforms can be a problem especially when it comes to organizations as they need to share passwords among team members. 
 
@@ -64,7 +64,7 @@ Everytime the user is comes back to the portal or the browser after few minutes 
 
 ## High-level Requirements
 
-The prototype has been made and currently the main website is being built on it it so far the we are working on the authentication part but in the coming sprints we would be using building an extension to enable encryption and decrpytion via  public and private keys.
+The prototype has been made and currently the main website is being built on it so far the we are working on the authentication part but in the coming sprints we would be building an extension to enable encryption and decrpytion via  public and private keys.
 
 ## Use Case Diagram
 
@@ -79,7 +79,7 @@ The prototype has been made and currently the main website is being built on it 
                      How authentication works for different cases
 # Impacts
 
-So far we have planned to use MERN stack (MongoDB, Express, React, NodeJS) to develop this project. So far the project is not completely developed to determine its impacts.
+We have planned to use MERN stack (MongoDB, Express, React, NodeJS) to develop this project. So far the project is not completely developed to determine its impacts.
 
 
 # Software Process Management
@@ -130,7 +130,10 @@ Duration: 02/05/2023 - 03/11/2023
 
 #### Completed Tasks:  
 
-1. FrontEnd and Backend integration
-2. Passphrase prototype
-3. Encrypting password storage in database
+1. UI for Login Page
+2. UI for Signup Page
+3. Endpoints for Login and Signup
+4. Endpoint to show all the resources of a logged in user
+5. Endpoint to create a resource
+6. UI to see all the resources of a logged in user
 
