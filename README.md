@@ -67,16 +67,17 @@ Everytime the user is comes back to the portal or the browser after few minutes 
 The prototype has been made and currently the main website is being built on it so far the we are working on the authentication part but in the coming sprints we would be building an extension to enable encryption and decrpytion via  public and private keys.
 
 ## Use Case Diagram
+![use case diagram](https://user-images.githubusercontent.com/92238381/218239606-9150c546-5f81-4839-9aa3-e00bc47988a3.png)
 
-![Client UI Dataflow drawio (1) (1)](https://user-images.githubusercontent.com/46633374/218194429-b06a08cd-7303-465f-98ee-f0e45c64df4e.png)
 
-                       User interaction with the website
 ## Sequence Diagram
 
-![Authorization Dataflow drawio (1)](https://user-images.githubusercontent.com/46633374/218194491-c5f61d6d-ec31-4fb7-9c93-99f68191bcf8.png)
+1. Signup
+![signup](https://user-images.githubusercontent.com/92238381/218239655-d7695632-3087-4dbc-a98a-c521da58a48e.png)
 
+2. Login
+3. Create Password
 
-                     How authentication works for different cases
 # Impacts
 
 We have planned to use MERN stack (MongoDB, Express, React, NodeJS) to develop this project. So far the project is not completely developed to determine its impacts.
