@@ -78,8 +78,13 @@ When the user clicks on the signup button on our web application, he is redirect
 
 2. Login
 The user enters the email and password on the signup screen and clicks the submit button. On this button click, our web application sends a POST request to the server with the given email and password in the body. The server checks in the db if the user exists with the given credentials or not. If user not found, server sends an error response to the web application and this error message gets displayed on the UI. If user with the given credentials exists in the database, the server sends a success response back to the web application and the user gets redirected to the main screen.
+![Login sequence diagram](https://user-images.githubusercontent.com/46633374/218240463-e12d3dfb-8ed1-4158-990e-fbf7e6f6fab7.png)
+
+
 
 3. Create Password (Resource)
+![Resource sequence diagram](https://user-images.githubusercontent.com/46633374/218240471-9b063eb0-4ca9-419e-975d-63a08f9029fc.png)
+
 
 
 # Impacts
