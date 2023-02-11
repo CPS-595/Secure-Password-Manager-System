@@ -67,19 +67,18 @@ function Basic() {
     } else {
       console.log("email", email);
       console.log("password", password);
-      axios.post(`http://localhost:8081/login`, { email, password }).then((res) => {
-        console.log(res);
-        console.log(res.data);
-        if (res.data.status === "authentication-failed") {
-          setEmailError(res.data.message);
-        } else {
-          setLoggedIn(true);
-          console.log("login successfull!");
-          // history.push('/dashboard');
-          // const navigate = useNavigate();
-          // navigate("/dashboard");
-        }
-      });
+      axios
+        .post(`http://localhost:8081/auth`, { email, password })
+        .then((res) => {
+          console.log(res);
+          console.log(res.data);
+          if (res.data.status === "Success") {
+            setLoggedIn(true);
+          }
+        })
+        .catch((err) => {
+          setEmailError(err.response.data.message);
+        });
     }
   };
 
@@ -100,7 +99,7 @@ function Basic() {
   if (loggedIn) {
     return (
       <Routes>
-        <Route path="*" element={<Navigate to="/dashboard" />} />
+        <Route path="*" element={<Navigate to="/tables" />} />
       </Routes>
     );
   }

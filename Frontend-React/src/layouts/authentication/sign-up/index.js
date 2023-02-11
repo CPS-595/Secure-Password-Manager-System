@@ -82,15 +82,18 @@ function Cover() {
     } else if (!terms) {
       setTermsError("Please agree to the terms and conditions!");
     } else {
-      axios.post(`http://localhost:8081/signup`, { email, password, name, number }).then((res) => {
-        console.log(res);
-        console.log(res.data);
-        if (res.data.status === "registeration-failed") {
-          setEmailError(res.data.message);
-        } else {
-          setLoggedIn(true);
-        }
-      });
+      axios
+        .post(`http://localhost:8081/register`, { email, password, name, number })
+        .then((res) => {
+          console.log(res);
+          console.log(res.data);
+          if (res.data.status === "Success") {
+            setLoggedIn(true);
+          }
+        })
+        .catch((err) => {
+          setEmailError(err.response.data.message);
+        });
     }
   };
 
