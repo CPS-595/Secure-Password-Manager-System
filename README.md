@@ -73,10 +73,12 @@ The prototype has been made and currently the main website is being built on it 
 ## Sequence Diagram
 
 1. Signup
+
 When the user clicks on the signup button on our web application, he is redirected to the signup screen. Here, the user enters the name, email address, phone number and password and clicks the submit button. On this button click, our application sends a post request to the server with the given name, email, phone number and passwords. The Server checks in the database if a user already exists for this email address or not. If this email address already exists in the database, the server sends a response that this user already exists and this error message gets displayed on the UI. Otherwise, server creates a new user in the database and sends a success response to the web application and this success message gets displayed on the UI.
 ![signup](https://user-images.githubusercontent.com/92238381/218239655-d7695632-3087-4dbc-a98a-c521da58a48e.png)
 
 2. Login
+
 The user enters the email and password on the signup screen and clicks the submit button. On this button click, our web application sends a POST request to the server with the given email and password in the body. The server checks in the db if the user exists with the given credentials or not. If user not found, server sends an error response to the web application and this error message gets displayed on the UI. If user with the given credentials exists in the database, the server sends a success response back to the web application and the user gets redirected to the main screen.
 ![Login sequence diagram](https://user-images.githubusercontent.com/46633374/218240463-e12d3dfb-8ed1-4158-990e-fbf7e6f6fab7.png)
 
