@@ -45,6 +45,8 @@ import createCache from "@emotion/cache";
 
 // Material Dashboard 2 React routes
 import routes from "routes";
+import unprotectedRoutes from "unprotectedRoutes";
+import RequireAuth from "components/RequireAuth";
 
 // Material Dashboard 2 React contexts
 import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "context";
@@ -179,7 +181,7 @@ export default function App() {
           <Sidenav
             color={sidenavColor}
             brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-            brandName="Material Dashboard 2"
+            brandName="Password Manager"
             routes={routes}
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}
@@ -190,7 +192,8 @@ export default function App() {
       )}
       {layout === "vr" && <Configurator />}
       <Routes>
-        {getRoutes(routes)}
+        {getRoutes(unprotectedRoutes)}
+        <Route element={<RequireAuth />}>{getRoutes(routes)}</Route>
         <Route path="*" element={<Navigate to="/authentication/sign-in" />} />
       </Routes>
     </ThemeProvider>

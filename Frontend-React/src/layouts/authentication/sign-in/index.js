@@ -14,6 +14,7 @@ Coded by www.creative-tim.com
 */
 
 import { useState } from "react";
+import useAuth from "hooks/useAuth";
 
 // react-router-dom components
 import { Link, Navigate, Routes, Route } from "react-router-dom";
@@ -40,10 +41,13 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
-import axios from "axios";
+import axios from "api/axios";
+
+const LOGIN_URL = "/auth";
 // import { Redirect } from 'react-router';
 
 function Basic() {
+  const { setAuth } = useAuth();
   const [rememberMe, setRememberMe] = useState(false);
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -53,7 +57,7 @@ function Basic() {
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
-  const handleSignIn = () => {
+  const handleSignIn = async () => {
     if (email === "") {
       setEmailError("Email Address cannot be empty!");
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
@@ -67,18 +71,34 @@ function Basic() {
     } else {
       console.log("email", email);
       console.log("password", password);
-      axios
-        .post(`http://localhost:8081/auth`, { email, password })
-        .then((res) => {
-          console.log(res);
-          console.log(res.data);
-          if (res.data.status === "Success") {
-            setLoggedIn(true);
-          }
-        })
-        .catch((err) => {
-          setEmailError(err.response.data.message);
+      try {
+        const response = await axios.post(LOGIN_URL, JSON.stringify({ email, password }), {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
         });
+        console.log(JSON.stringify(response?.data));
+        //  console.log(JSON.stringify(response));
+        const accessToken = response?.data?.accessToken;
+        const user = response?.data?.user;
+        setAuth({ user, accessToken });
+        if (response?.data?.status === "Success") {
+          setLoggedIn(true);
+        }
+      } catch (err) {
+        setEmailError(err.response.data.message);
+      }
+      //   axios
+      //     .post(`http://localhost:8081/auth`, { email, password })
+      //     .then((res) => {
+      //       console.log(res);
+      //       console.log(res.data);
+      //       if (res.data.status === "Success") {
+      //         setLoggedIn(true);
+      //       }
+      //     })
+      //     .catch((err) => {
+      //       setEmailError(err.response.data.message);
+      //     });
     }
   };
 
@@ -99,7 +119,7 @@ function Basic() {
   if (loggedIn) {
     return (
       <Routes>
-        <Route path="*" element={<Navigate to="/tables" />} />
+        <Route path="*" element={<Navigate to="/resources" />} />
       </Routes>
     );
   }

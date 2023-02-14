@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+// import { useNavigate, useLocation } from "react-router-dom";
 import useAxiosPrivate from "hooks/useAxiosPrivate";
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -35,7 +35,7 @@ import MDButton from "components/MDButton";
 // Data
 // import authorsTableData from "layouts/tables/data/authorsTableData";
 
-function Tables() {
+function Resources() {
   const axiosPrivate = useAxiosPrivate();
   const [columns, setColumns] = useState([]);
   const [datas, setDatas] = useState([]);
@@ -186,8 +186,8 @@ function Tables() {
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
-    const navigate = useNavigate();
-    const location = useLocation();
+    // const navigate = useNavigate();
+    // const location = useLocation();
     const getResources = async () => {
       try {
         const response = await axiosPrivate.get("/resources", {
@@ -200,7 +200,7 @@ function Tables() {
         }
       } catch (err) {
         console.error(err);
-        navigate("/authentication/sign-in", { state: { from: location }, replace: true });
+        // navigate("/authentication/sign-in", { state: { from: location }, replace: true });
       }
     };
     getResources();
@@ -283,4 +283,4 @@ function Tables() {
   );
 }
 
-export default Tables;
+export default Resources;
