@@ -34,9 +34,13 @@ import CoverLayout from "layouts/authentication/components/CoverLayout";
 // Images
 import bgImage from "assets/images/bg-sign-up-cover.jpeg";
 
-import axios from "axios";
+import axios from "api/axios";
+import Modal from "react-awesome-modal";
+
+const SIGNUP_URL = "/register";
 
 function Cover() {
+  const [showModal, setShowModal] = useState(false);
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState("");
   const [number, setNumber] = useState("");
@@ -62,7 +66,7 @@ function Cover() {
     clearErrors();
   };
 
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
     if (name === "") {
       setNameError("Name cannot empty!");
     } else if (email === "") {
@@ -82,18 +86,34 @@ function Cover() {
     } else if (!terms) {
       setTermsError("Please agree to the terms and conditions!");
     } else {
-      axios
-        .post(`http://localhost:8081/register`, { email, password, name, number })
-        .then((res) => {
-          console.log(res);
-          console.log(res.data);
-          if (res.data.status === "Success") {
-            setLoggedIn(true);
-          }
-        })
-        .catch((err) => {
-          setEmailError(err.response.data.message);
-        });
+      try {
+        const response = await axios.post(
+          SIGNUP_URL,
+          JSON.stringify({ email, password, name, number }),
+          { headers: { "Content-Type": "application/json" }, withCredentials: true }
+        );
+        console.log(JSON.stringify(response?.data));
+        //  console.log(JSON.stringify(response));
+        // const accessToken = response?.data?.accessToken;
+        // const user = response?.data?.user;
+        if (response?.data?.status === "Success") {
+          setShowModal(true);
+        }
+      } catch (err) {
+        setEmailError(err.response.data.message);
+      }
+      // axios
+      //   .post(`http://localhost:8081/register`, { email, password, name, number })
+      //   .then((res) => {
+      //     console.log(res);
+      //     console.log(res.data);
+      //     if (res.data.status === "Success") {
+      //       setLoggedIn(true);
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     setEmailError(err.response.data.message);
+      //   });
     }
   };
 
@@ -151,6 +171,28 @@ function Cover() {
             Join us today
           </MDTypography>
         </MDBox>
+        <Modal visible={showModal} width="400" height="300" effect="fadeInUp">
+          <MDBox component="form" role="form" style={{ margin: "30px" }}>
+            <MDBox mb={2}>
+              <MDTypography variant="h5" fontWeight="medium" color="black" mt={1}>
+                Signup Successfull!
+              </MDTypography>
+            </MDBox>
+            <MDBox mt={4} mb={1}>
+              <MDButton
+                variant="gradient"
+                color="info"
+                fullWidth
+                onClick={() => {
+                  setShowModal(false);
+                  setLoggedIn(true);
+                }}
+              >
+                Continue
+              </MDButton>
+            </MDBox>
+          </MDBox>
+        </Modal>
         <MDBox pt={4} pb={3} px={3}>
           <MDBox component="form" role="form">
             <MDBox mb={2}>
