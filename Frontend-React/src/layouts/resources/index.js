@@ -28,9 +28,11 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import DataTable from "examples/Tables/DataTable";
 import Icon from "@mui/material/Icon";
+// import IconButton from "@mui/material/IconButton";
 import MDInput from "components/MDInput";
 import Modal from "react-awesome-modal";
 import MDButton from "components/MDButton";
+import NewResource from "./NewResource";
 
 // Data
 // import authorsTableData from "layouts/tables/data/authorsTableData";
@@ -41,6 +43,11 @@ function Resources() {
   const [datas, setDatas] = useState([]);
   const [rows, setRows] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [createModal, setCreateModal] = useState(false);
+
+  const toggleCreateModal = () => {
+    setCreateModal(!createModal);
+  };
 
   const showPassword = (index) => {
     console.log("in show password", index);
@@ -261,11 +268,23 @@ function Resources() {
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
               >
                 <MDTypography variant="h6" color="white">
                   Stored Passwords
                 </MDTypography>
+                <MDButton
+                  variant="outlined"
+                  size="medium"
+                  color="white"
+                  onClick={() => setCreateModal(true)}
+                >
+                  <Icon>add</Icon>&nbsp;&nbsp;&nbsp;Create New
+                </MDButton>
               </MDBox>
+              <NewResource showModal={createModal} setShowModal={toggleCreateModal} />
               <MDBox pt={3}>
                 <DataTable
                   table={{ columns, rows }}
