@@ -41,59 +41,116 @@ function NewResource({ showModal, setShowModal }) {
   const [resourceName, setResourceName] = useState("");
   const [password, setPassword] = useState("");
   const [url, setUrl] = useState("");
-  // const [error, setError] = useState("");
+  const [userName, setUserName] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [urlError, setUrlError] = useState("");
+  const [userNameError, setUserNameError] = useState("");
+  const reset = () => {
+    setShowModal(false);
+    setResourceName("");
+    setUrl("");
+    setPassword("");
+    setUserName("");
+    document.getElementById("error").innerHTML = "";
+  };
   const handleName = (event) => {
     setResourceName(event.target.value);
+    if (event.target.value !== "") {
+      setNameError("");
+      document.getElementById("error").innerHTML = "";
+    }
   };
   const handlePassword = (event) => {
     setPassword(event.target.value);
+    if (event.target.value !== "") {
+      setPasswordError("");
+      document.getElementById("error").innerHTML = "";
+    }
   };
   const handleUrl = (event) => {
     setUrl(event.target.value);
+    if (event.target.value !== "") {
+      setUrlError("");
+      document.getElementById("error").innerHTML = "";
+    }
+  };
+
+  const handleUserName = (event) => {
+    setUserName(event.target.value);
+    if (event.target.value !== "") {
+      setUserNameError("");
+      document.getElementById("error").innerHTML = "";
+    }
   };
 
   return (
-    <Modal visible={showModal} effect="fadeInUp" width="60%" height="80%">
+    <Modal visible={showModal} effect="fadeInUp" width="60%" height="60%">
       <MDBox component="form" role="form" style={{ margin: "30px" }}>
         <MDTypography variant="h4">Create a Password</MDTypography>
         <br />
         <MDBox mb={2}>
           <MDInput
+            id="name"
             type="text"
             label="Name"
             fullWidth
             value={resourceName}
             onChange={handleName}
-            // error={error}
+            error={nameError}
           />
         </MDBox>
         <MDBox mb={2}>
           <MDInput
+            id="url"
             type="text"
             label="URL"
             fullWidth
             value={url}
             onChange={handleUrl}
-            // error={error}
+            error={urlError}
           />
         </MDBox>
         <MDBox mb={2}>
           <MDInput
+            id="username"
+            type="text"
+            label="Username / Email Address"
+            fullWidth
+            value={userName}
+            onChange={handleUserName}
+            error={userNameError}
+          />
+        </MDBox>
+        <MDBox mb={2}>
+          <MDInput
+            id="password"
             type="password"
             label="Password"
             fullWidth
             value={password}
             onChange={handlePassword}
-            // error={error}
+            error={passwordError}
           />
+        </MDBox>
+        <MDBox mb={2}>
+          <MDTypography
+            color="error"
+            id="error"
+            variant="button"
+            style={{ display: "none" }}
+            fontWeight="medium"
+          >
+            Error
+          </MDTypography>
         </MDBox>
         <br />
         <MDBox width="100%" display="flex">
-          <MDButton variant="gradient" color="secondary" onClick={() => setShowModal(false)}>
+          <MDButton variant="gradient" color="secondary" onClick={reset}>
             Cancel
           </MDButton>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <MDButton variant="gradient" color="info" onClick={() => setShowModal(false)}>
+          <MDButton id="create" variant="gradient" color="info">
             Create
           </MDButton>
         </MDBox>

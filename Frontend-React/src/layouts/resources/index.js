@@ -276,6 +276,7 @@ function Resources() {
                   Stored Passwords
                 </MDTypography>
                 <MDButton
+                  id="create-new"
                   variant="outlined"
                   size="medium"
                   color="white"
