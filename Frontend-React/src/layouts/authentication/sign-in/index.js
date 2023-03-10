@@ -119,7 +119,7 @@ function Basic() {
   if (loggedIn) {
     return (
       <Routes>
-        <Route path="*" element={<Navigate to="/resources" />} />
+        <Route path="*" element={<Navigate to="/credentials" />} />
       </Routes>
     );
   }

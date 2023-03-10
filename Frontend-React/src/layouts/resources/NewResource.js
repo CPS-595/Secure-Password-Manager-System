@@ -12,7 +12,7 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // // import { useNavigate, useLocation } from "react-router-dom";
 // import useAxiosPrivate from "hooks/useAxiosPrivate";
 // // @mui material components
@@ -84,10 +84,18 @@ function NewResource({ showModal, setShowModal }) {
     }
   };
 
+  useEffect(() => {
+    document.addEventListener("csEvent", (event) => {
+      const data = event.detail;
+      console.log("event called", data);
+      // Do something with you data from CRX
+    });
+  }, []);
+
   return (
     <Modal visible={showModal} effect="fadeInUp" width="60%" height="60%">
       <MDBox component="form" role="form" style={{ margin: "30px" }}>
-        <MDTypography variant="h4">Create a Password</MDTypography>
+        <MDTypography variant="h4">Create a Credential</MDTypography>
         <br />
         <MDBox mb={2}>
           <MDInput

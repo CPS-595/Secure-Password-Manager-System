@@ -57,10 +57,10 @@ const routes = [
   // },
   {
     type: "collapse",
-    name: "Resources",
+    name: "Credentials",
     key: "resources",
     icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/resources",
+    route: "/credentials",
     component: <Resources />,
   },
   // {

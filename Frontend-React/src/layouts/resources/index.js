@@ -191,6 +191,11 @@ function Resources() {
   };
 
   useEffect(() => {
+    document.addEventListener("encryptedPassword", (event) => {
+      const data = event.detail;
+      console.log("event called", data);
+      // Do something with you data from CRX
+    });
     let isMounted = true;
     const controller = new AbortController();
     // const navigate = useNavigate();
@@ -273,7 +278,7 @@ function Resources() {
                 alignItems="center"
               >
                 <MDTypography variant="h6" color="white">
-                  Stored Passwords
+                  Credentials
                 </MDTypography>
                 <MDButton
                   id="create-new"
