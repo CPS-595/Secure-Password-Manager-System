@@ -37,6 +37,8 @@ Source code for Frontend (private access): <https://github.com/CPS-595/Secure-Pa
 
 Source code for Backend (private access): <https://github.com/CPS-595/login_signup_microservice>
 
+Source code for Extension (private access): <https://github.com/CPS-595/Extension>
+
 
 # Overview
  
@@ -83,13 +85,14 @@ The user enters the email and password on the signup screen and clicks the submi
 ![Login sequence diagram](https://user-images.githubusercontent.com/46633374/218240463-e12d3dfb-8ed1-4158-990e-fbf7e6f6fab7.png)
 
 
+3. View all Credentials
+![Extension](https://user-images.githubusercontent.com/92238381/224171786-747d696e-cc05-41e0-b2b2-f9cf2f94a28d.png)
 
-3. Create Password (Resource)
+
+4. Create Credential
 
 After loggin in successfully, the user lands on the main screen where he gets the option to add a resource. Resource is basically the password that the user needs to store. Resource contains the name, password, url and the name of the user who created this. When the user clicks on the create button, he is shown the pop up to add name, password, url and username. After adding this information, user is asked to enter the account password for verification. All this information entered by the user is sent to the server. The server first verifies if correct account password is entered or not. If the account password is correct, server creates a resource in the database and sends success response to the web application. Otherwise, it sends an error message to the web application that the account password is incorrect.
-![Resource sequence diagram](https://user-images.githubusercontent.com/46633374/218240471-9b063eb0-4ca9-419e-975d-63a08f9029fc.png)
-
-
+![CreateCredential](https://user-images.githubusercontent.com/92238381/224171725-cdbc7d5d-7238-4a3e-a240-1495b9bf524a.png)
 
 # Impacts
 
