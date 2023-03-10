@@ -12,7 +12,7 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 // // import { useNavigate, useLocation } from "react-router-dom";
 // import useAxiosPrivate from "hooks/useAxiosPrivate";
 // // @mui material components
@@ -37,7 +37,10 @@ import MDButton from "components/MDButton";
 import Modal from "react-awesome-modal";
 import PropTypes from "prop-types";
 
-function NewResource({ showModal, setShowModal }) {
+import useAxiosPrivate from "hooks/useAxiosPrivate";
+
+function NewResource({ showModal, setShowModal, openSuccessSB }) {
+  const axiosPrivate = useAxiosPrivate();
   const [resourceName, setResourceName] = useState("");
   const [password, setPassword] = useState("");
   const [url, setUrl] = useState("");
@@ -46,6 +49,9 @@ function NewResource({ showModal, setShowModal }) {
   const [passwordError, setPasswordError] = useState("");
   const [urlError, setUrlError] = useState("");
   const [userNameError, setUserNameError] = useState("");
+  const resourceNameRef = useRef(resourceName);
+  const userNameRef = useRef(userName);
+  const urlRef = useRef(url);
   const reset = () => {
     setShowModal(false);
     setResourceName("");
@@ -55,6 +61,8 @@ function NewResource({ showModal, setShowModal }) {
     document.getElementById("error").innerHTML = "";
   };
   const handleName = (event) => {
+    console.log("handleName", event.target.value);
+    resourceNameRef.current = event.target.value;
     setResourceName(event.target.value);
     if (event.target.value !== "") {
       setNameError("");
@@ -69,6 +77,8 @@ function NewResource({ showModal, setShowModal }) {
     }
   };
   const handleUrl = (event) => {
+    console.log("resourceName", resourceName);
+    urlRef.current = event.target.value;
     setUrl(event.target.value);
     if (event.target.value !== "") {
       setUrlError("");
@@ -78,6 +88,7 @@ function NewResource({ showModal, setShowModal }) {
 
   const handleUserName = (event) => {
     setUserName(event.target.value);
+    userNameRef.current = event.target.value;
     if (event.target.value !== "") {
       setUserNameError("");
       document.getElementById("error").innerHTML = "";
@@ -85,9 +96,34 @@ function NewResource({ showModal, setShowModal }) {
   };
 
   useEffect(() => {
-    document.addEventListener("csEvent", (event) => {
+    document.addEventListener("csEvent", async (event) => {
       const data = event.detail;
       console.log("event called", data);
+      console.log("resourceName", resourceNameRef.current);
+      console.log("url", urlRef.current);
+      console.log("userName", userNameRef.current);
+      try {
+        const response = await axiosPrivate.post(
+          "/resources",
+          JSON.stringify({
+            name: resourceNameRef.current,
+            url: urlRef.current,
+            username: userNameRef.current,
+            password: data.password,
+          }),
+          {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+          }
+        );
+        console.log(response?.data);
+        if (response?.data.status === "Success") {
+          reset();
+          openSuccessSB();
+        }
+      } catch (err) {
+        console.log("Post request create resource error:", err);
+      }
       // Do something with you data from CRX
     });
   }, []);
@@ -170,12 +206,14 @@ function NewResource({ showModal, setShowModal }) {
 NewResource.defaultProps = {
   showModal: false,
   setShowModal: null,
+  openSuccessSB: null,
 };
 
 // Typechecking props for the Header
 NewResource.propTypes = {
   showModal: PropTypes.bool,
   setShowModal: PropTypes.func,
+  openSuccessSB: PropTypes.func,
 };
 
 export default NewResource;

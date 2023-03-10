@@ -32,6 +32,7 @@ import Icon from "@mui/material/Icon";
 import MDInput from "components/MDInput";
 import Modal from "react-awesome-modal";
 import MDButton from "components/MDButton";
+import MDSnackbar from "components/MDSnackbar";
 import NewResource from "./NewResource";
 
 // Data
@@ -39,15 +40,12 @@ import NewResource from "./NewResource";
 
 function Resources() {
   const axiosPrivate = useAxiosPrivate();
+  const [successSB, setSuccessSB] = useState(false);
   const [columns, setColumns] = useState([]);
   const [datas, setDatas] = useState([]);
   const [rows, setRows] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [createModal, setCreateModal] = useState(false);
-
-  const toggleCreateModal = () => {
-    setCreateModal(!createModal);
-  };
 
   const showPassword = (index) => {
     console.log("in show password", index);
@@ -136,13 +134,15 @@ function Resources() {
     console.log("rws", rws);
     setRows(rws);
   };
+
   const prepareData = (dataGot) => {
     setDatas(dataGot);
     const cols = [
-      { Header: "Resource", accessor: "resource", width: "30%", align: "left" },
-      { Header: "Password", accessor: "password", align: "center" },
-      { Header: "Created", accessor: "created", align: "center" },
-      { Header: "Action", accessor: "action", align: "center" },
+      { Header: "Name", accessor: "name", width: "20%", align: "left" },
+      { Header: "URL", accessor: "url", align: "left" },
+      { Header: "Username", accessor: "username", align: "left" },
+      { Header: "Password", accessor: "password", align: "left" },
+      { Header: "Action", accessor: "action", align: "left" },
     ];
     const rws = [];
     const data = [];
@@ -156,10 +156,12 @@ function Resources() {
     }
     for (let i = 0; i < dataGot.length; i += 1) {
       rws.push({
-        resource: <MDTypography variant="caption">{dataGot[i].name}</MDTypography>,
+        name: <MDTypography variant="caption">{dataGot[i].name}</MDTypography>,
+        url: <MDTypography variant="caption">{dataGot[i].url}</MDTypography>,
+        username: <MDTypography variant="caption">{dataGot[i].username}</MDTypography>,
         password: (
           <MDTypography variant="caption">
-            ****
+            *********
             <Icon
               style={{
                 verticalAlign: "inherit",
@@ -171,11 +173,6 @@ function Resources() {
             >
               visibility
             </Icon>
-          </MDTypography>
-        ),
-        created: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            {dataGot[i].dateTime}
           </MDTypography>
         ),
         action: (
@@ -190,37 +187,43 @@ function Resources() {
     setRows(rws);
   };
 
-  useEffect(() => {
-    document.addEventListener("encryptedPassword", (event) => {
-      const data = event.detail;
-      console.log("event called", data);
-      // Do something with you data from CRX
-    });
-    let isMounted = true;
-    const controller = new AbortController();
-    // const navigate = useNavigate();
-    // const location = useLocation();
-    const getResources = async () => {
-      try {
-        const response = await axiosPrivate.get("/resources", {
-          signal: controller.signal,
-        });
-        console.log(response.data);
-        if (isMounted) {
-          setDatas(response.data.payload);
-          prepareData(response.data.payload);
-        }
-      } catch (err) {
-        console.error(err);
-        // navigate("/authentication/sign-in", { state: { from: location }, replace: true });
-      }
-    };
-    getResources();
+  const getResources = async () => {
+    try {
+      const response = await axiosPrivate.get("/resources");
+      console.log(response.data);
+      setDatas(response.data.payload);
+      prepareData(response.data.payload);
+    } catch (err) {
+      console.error(err);
+      // navigate("/authentication/sign-in", { state: { from: location }, replace: true });
+    }
+  };
 
-    return () => {
-      isMounted = false;
-      controller.abort();
-    };
+  const openSuccessSB = () => {
+    getResources();
+    setSuccessSB(true);
+  };
+
+  const closeSuccessSB = () => setSuccessSB(false);
+
+  const renderSuccessSB = (
+    <MDSnackbar
+      color="success"
+      icon="check"
+      title="Credential Created Successfully"
+      open={successSB}
+      onClose={closeSuccessSB}
+      close={closeSuccessSB}
+      bgWhite
+    />
+  );
+
+  const toggleCreateModal = () => {
+    setCreateModal(false);
+  };
+
+  useEffect(() => {
+    getResources();
   }, []);
 
   // useEffect(() => {
@@ -290,7 +293,12 @@ function Resources() {
                   <Icon>add</Icon>&nbsp;&nbsp;&nbsp;Create New
                 </MDButton>
               </MDBox>
-              <NewResource showModal={createModal} setShowModal={toggleCreateModal} />
+              <NewResource
+                showModal={createModal}
+                setShowModal={toggleCreateModal}
+                openSuccessSB={openSuccessSB}
+              />
+              {renderSuccessSB}
               <MDBox pt={3}>
                 <DataTable
                   table={{ columns, rows }}
