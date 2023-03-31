@@ -42,19 +42,36 @@ function Resources() {
   const [columns, setColumns] = useState([]);
   const [rows, setRows] = useState([]);
   const [createModal, setCreateModal] = useState(false);
-  const [seePassword, setSeePassword] = useState(false);
+  const [seePassword, setSeePassword] = useState({});
   const seePasswordReff = useRef(seePassword);
 
   const showPassword = (password, id) => {
-    console.log("seePassword", seePasswordReff.current);
-    if (!seePasswordReff.current) {
-      document.dispatchEvent(new CustomEvent("decryptpassword", { detail: { password, id } }));
+    if (seePasswordReff.current && seePasswordReff.current[id]) {
+      console.log("seePassword", seePasswordReff.current);
+      if (!seePasswordReff.current[id]) {
+        const iconPass = document.getElementById(`icon-${id}`);
+        iconPass.innerHTML = "visibility_off";
+        document.dispatchEvent(new CustomEvent("decryptpassword", { detail: { password, id } }));
+      } else {
+        const iconPass = document.getElementById(`icon-${id}`);
+        iconPass.innerHTML = "visibility";
+        const encryptedPass = document.getElementById(`password-${id}`);
+        encryptedPass.innerHTML = "*********";
+      }
+      seePasswordReff.current[id] = !seePasswordReff.current[id];
+      const temp = seePasswordReff.current;
+      // temp[id] = !seePasswordReff.current[id];
+      setSeePassword(temp);
     } else {
-      const encryptedPass = document.getElementById(`password-${id}`);
-      encryptedPass.innerHTML = "*********";
+      console.log("in else seePasswordReff.current", seePasswordReff.current);
+      const iconPass = document.getElementById(`icon-${id}`);
+      iconPass.innerHTML = "visibility_off";
+      document.dispatchEvent(new CustomEvent("decryptpassword", { detail: { password, id } }));
+      seePasswordReff.current[id] = true;
+      const temp = seePasswordReff.current;
+      // temp[id] = !seePasswordReff.current[id];
+      setSeePassword(temp);
     }
-    seePasswordReff.current = !seePasswordReff.current;
-    setSeePassword(!seePassword);
   };
 
   const prepareData = (dataGot) => {
@@ -86,7 +103,7 @@ function Resources() {
               }}
               onClick={() => showPassword(dataGot[i].password, dataGot[i].id)}
             >
-              visibility-off
+              visibility
             </Icon>
           </MDTypography>
         ),
