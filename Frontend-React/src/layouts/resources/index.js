@@ -29,8 +29,6 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import DataTable from "examples/Tables/DataTable";
 import Icon from "@mui/material/Icon";
 // import IconButton from "@mui/material/IconButton";
-import MDInput from "components/MDInput";
-import Modal from "react-awesome-modal";
 import MDButton from "components/MDButton";
 import MDSnackbar from "components/MDSnackbar";
 import NewResource from "./NewResource";
@@ -42,101 +40,14 @@ function Resources() {
   const axiosPrivate = useAxiosPrivate();
   const [successSB, setSuccessSB] = useState(false);
   const [columns, setColumns] = useState([]);
-  const [datas, setDatas] = useState([]);
   const [rows, setRows] = useState([]);
-  const [showModal, setShowModal] = useState(false);
   const [createModal, setCreateModal] = useState(false);
 
-  const showPassword = (index) => {
-    console.log("in show password", index);
-    console.log("in show password", datas);
-    setShowModal(true);
-    const rws = [];
-    const payload = datas;
-    for (let i = 0; i < payload.length; i += 1) {
-      //   if (i === index) {
-      //     rws[i] = {
-      //       resource: <MDTypography variant="caption">{payload[i].name}</MDTypography>,
-      //       password: (
-      //         <MDTypography variant="caption">
-      //           {payload[i].password}
-      //           <Icon
-      //             style={{
-      //               verticalAlign: "inherit",
-      //               fontSize: "18px",
-      //               marginLeft: "10px",
-      //               cursor: "pointer",
-      //             }}
-      //             onClick={() => showPassword(i)}
-      //           >
-      //             visibility
-      //           </Icon>
-      //         </MDTypography>
-      //       ),
-      //       created: (
-      //         <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-      //           {payload[i].dateTime}
-      //         </MDTypography>
-      //       ),
-      //       action: (
-      //         <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-      //           Edit
-      //         </MDTypography>
-      //       ),
-      //     };
-      //   }
-      rws.push({
-        resource: <MDTypography variant="caption">{payload[i].name}</MDTypography>,
-        password:
-          i === index ? (
-            <MDTypography variant="caption">
-              {payload[i].password}
-              <Icon
-                style={{
-                  verticalAlign: "inherit",
-                  fontSize: "18px",
-                  marginLeft: "10px",
-                  cursor: "pointer",
-                }}
-                onClick={() => showPassword(i)}
-              >
-                visibility
-              </Icon>
-            </MDTypography>
-          ) : (
-            <MDTypography variant="caption">
-              ****
-              <Icon
-                style={{
-                  verticalAlign: "inherit",
-                  fontSize: "18px",
-                  marginLeft: "10px",
-                  cursor: "pointer",
-                }}
-                onClick={() => showPassword(i)}
-              >
-                visibility
-              </Icon>
-            </MDTypography>
-          ),
-        created: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            {payload[i].dateTime}
-          </MDTypography>
-        ),
-        action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
-          </MDTypography>
-        ),
-      });
-    }
-    console.log("rws", rws);
-    setRows(rws);
+  const showPassword = (password) => {
+    document.dispatchEvent(new CustomEvent("decryptpassword", { detail: password }));
   };
 
   const prepareData = (dataGot) => {
-    setDatas(dataGot);
     const cols = [
       { Header: "Name", accessor: "name", width: "20%", align: "left" },
       { Header: "URL", accessor: "url", align: "left" },
@@ -145,15 +56,6 @@ function Resources() {
       { Header: "Action", accessor: "action", align: "left" },
     ];
     const rws = [];
-    const data = [];
-    for (let i = 0; i < dataGot.length; i += 1) {
-      data.push({
-        name: dataGot[i].name,
-        password: "*****",
-        createdBy: dataGot[i].createdBy,
-        url: dataGot[i].url,
-      });
-    }
     for (let i = 0; i < dataGot.length; i += 1) {
       rws.push({
         name: <MDTypography variant="caption">{dataGot[i].name}</MDTypography>,
@@ -169,7 +71,7 @@ function Resources() {
                 marginLeft: "10px",
                 cursor: "pointer",
               }}
-              onClick={() => showPassword(i)}
+              onClick={() => showPassword(dataGot[i].password)}
             >
               visibility
             </Icon>
@@ -191,7 +93,6 @@ function Resources() {
     try {
       const response = await axiosPrivate.get("/resources");
       console.log(response.data);
-      setDatas(response.data.payload);
       prepareData(response.data.payload);
     } catch (err) {
       console.error(err);
@@ -249,23 +150,6 @@ function Resources() {
       <MDBox pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
-            <Modal visible={showModal} width="400" height="300" effect="fadeInUp">
-              <MDBox component="form" role="form" style={{ margin: "30px" }}>
-                <MDBox mb={2}>
-                  <MDInput type="password" label="Password" fullWidth />
-                </MDBox>
-                <MDBox mt={4} mb={1}>
-                  <MDButton
-                    variant="gradient"
-                    color="info"
-                    fullWidth
-                    onClick={() => setShowModal(false)}
-                  >
-                    Submit
-                  </MDButton>
-                </MDBox>
-              </MDBox>
-            </Modal>
             <Card>
               <MDBox
                 mx={2}
