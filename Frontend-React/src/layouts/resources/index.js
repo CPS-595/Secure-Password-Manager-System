@@ -12,7 +12,7 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 // import { useNavigate, useLocation } from "react-router-dom";
 import useAxiosPrivate from "hooks/useAxiosPrivate";
 // @mui material components
@@ -42,9 +42,19 @@ function Resources() {
   const [columns, setColumns] = useState([]);
   const [rows, setRows] = useState([]);
   const [createModal, setCreateModal] = useState(false);
+  const [seePassword, setSeePassword] = useState(false);
+  const seePasswordReff = useRef(seePassword);
 
-  const showPassword = (password) => {
-    document.dispatchEvent(new CustomEvent("decryptpassword", { detail: password }));
+  const showPassword = (password, id) => {
+    console.log("seePassword", seePasswordReff.current);
+    if (!seePasswordReff.current) {
+      document.dispatchEvent(new CustomEvent("decryptpassword", { detail: { password, id } }));
+    } else {
+      const encryptedPass = document.getElementById(`password-${id}`);
+      encryptedPass.innerHTML = "*********";
+    }
+    seePasswordReff.current = !seePasswordReff.current;
+    setSeePassword(!seePassword);
   };
 
   const prepareData = (dataGot) => {
@@ -63,17 +73,20 @@ function Resources() {
         username: <MDTypography variant="caption">{dataGot[i].username}</MDTypography>,
         password: (
           <MDTypography variant="caption">
-            *********
+            <div id={`password-${dataGot[i].id}`} style={{ display: "inline" }}>
+              *********
+            </div>
             <Icon
+              id={`icon-${dataGot[i].id}`}
               style={{
                 verticalAlign: "inherit",
                 fontSize: "18px",
                 marginLeft: "10px",
                 cursor: "pointer",
               }}
-              onClick={() => showPassword(dataGot[i].password)}
+              onClick={() => showPassword(dataGot[i].password, dataGot[i].id)}
             >
-              visibility
+              visibility-off
             </Icon>
           </MDTypography>
         ),
