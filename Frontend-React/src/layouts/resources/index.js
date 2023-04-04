@@ -31,6 +31,7 @@ import Icon from "@mui/material/Icon";
 // import IconButton from "@mui/material/IconButton";
 import MDButton from "components/MDButton";
 import MDSnackbar from "components/MDSnackbar";
+import ShareResource from "./ShareResource";
 import NewResource from "./NewResource";
 
 // Data
@@ -42,6 +43,7 @@ function Resources() {
   const [columns, setColumns] = useState([]);
   const [rows, setRows] = useState([]);
   const [createModal, setCreateModal] = useState(false);
+  const [createModalShare, setCreateShareModal] = useState(false);
   const [seePassword, setSeePassword] = useState({});
   const seePasswordReff = useRef(seePassword);
 
@@ -108,9 +110,15 @@ function Resources() {
           </MDTypography>
         ),
         action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
-          </MDTypography>
+          <MDButton
+            id="share"
+            variant="outlined"
+            size="small"
+            color="black"
+            onClick={() => setCreateShareModal(true)}
+          >
+            Share
+          </MDButton>
         ),
       });
     }
@@ -136,7 +144,6 @@ function Resources() {
   };
 
   const closeSuccessSB = () => setSuccessSB(false);
-
   const renderSuccessSB = (
     <MDSnackbar
       color="success"
@@ -153,7 +160,32 @@ function Resources() {
     setCreateModal(false);
   };
 
+  const toggleCreateShareModal = () => {
+    setCreateShareModal(false);
+  };
+
   useEffect(() => {
+    // chrome.storage.local.get("publicKey", (result) => {
+    //   console.log("result", result)
+    // });
+    // document.addEventListener("publickey", async (event) => {
+    //   console.log("public key on Front end", event.detail);
+    //   try {
+    //     const response = await axiosPrivate.post(
+    //       "/users",
+    //       JSON.stringify({
+    //         publicKey: event.detail,
+    //       }),
+    //       {
+    //         headers: { "Content-Type": "application/json" },
+    //         withCredentials: true,
+    //       }
+    //     );
+    //     console.log(response?.data);
+    //   } catch (err) {
+    //     console.log("Post request create resource error:", err);
+    //   }
+    // });
     getResources();
   }, []);
 
@@ -210,6 +242,11 @@ function Resources() {
               <NewResource
                 showModal={createModal}
                 setShowModal={toggleCreateModal}
+                openSuccessSB={openSuccessSB}
+              />
+              <ShareResource
+                showModal={createModalShare}
+                setShowModal={toggleCreateShareModal}
                 openSuccessSB={openSuccessSB}
               />
               {renderSuccessSB}
