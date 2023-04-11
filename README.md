@@ -115,15 +115,7 @@ If a user wants to share a crendtial with someone, he would click on the share b
 
 We have planned to use MERN stack (MongoDB, Express, React, NodeJS) to develop this project. So far the project is not completely developed to determine its impacts.
 
-
-# Software Process Management
-
-
-We have used AGILE methodology to divide the project into 5 sprints. Currently we are in the Development Stage sprint 1.
-
-The Trello would have a weekly task and they would be updated everytime a task is completed. 
-
-## How to Run and test the project
+# How to Run and test the project
 
 1. Make sure you have git installed via <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>
 2. Install node js for your Operating system by following the instructions on this link :<https://nodejs.org/en/download/package-manager>
