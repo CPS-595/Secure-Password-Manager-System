@@ -75,7 +75,8 @@ Other functionalities that thought of but couldn't complete due to time constrai
 - Read/Write access while sharing a password
 
 ## Use Case Diagram
-![use case diagram](https://user-images.githubusercontent.com/92238381/218239606-9150c546-5f81-4839-9aa3-e00bc47988a3.png)
+<img width="572" alt="Screenshot 2023-04-11 at 2 58 10 PM" src="https://user-images.githubusercontent.com/92238381/231265329-dc3be1b4-5f0b-435a-896b-eb049d29c5ba.png">
+
 
 
 ## Sequence Diagrams
