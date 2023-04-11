@@ -108,6 +108,8 @@ When the user clicks on the reveal icon to see the password for that particular 
 
 ### 6. Share Credential
 If a user wants to share a crendtial with someone, he would click on the share button for that credential. Doing so would open a pop up from where the user can select the people he wants to share the credential with. When the user clicks on the submit button after selecting the people, the extension uses the public keys of the people selected and ecrypts the password using those for each selected person and sends request to the server to store the encrypted password.
+![share credential](https://user-images.githubusercontent.com/92238381/231269062-9e251f12-b495-4d4a-b947-4e0fcd33b3fe.png)
+
 
 # Impacts
 
