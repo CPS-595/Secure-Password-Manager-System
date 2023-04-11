@@ -113,7 +113,9 @@ If a user wants to share a crendtial with someone, he would click on the share b
 
 # Impacts
 
-We have planned to use MERN stack (MongoDB, Express, React, NodeJS) to develop this project. So far the project is not completely developed to determine its impacts.
+By working on this project, we got to learn a lot of things. We were not familiar with React JS before but we learnt React JS for this project to build the frontend. Also, we had never developed a chrome extension before. We learnt how a chrome extension works and created it. Other than that, we got the basic idea of how the encryption and decryption works and we implemented it using RSA Algorithm.
+
+Overall, this project proved very beneficial for us as it enhanced our knowledge and technical skill set.
 
 # How to Run and test the project
 
