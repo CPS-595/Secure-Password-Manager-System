@@ -62,11 +62,11 @@ We have created a web portal where users can sign up. After signup, the user wou
 ## High-level Requirements
 
 Our sytem has 3 main functionalities that we have been able to successfully finish so far:  
-###1. Create a credential  
+### 1. Create a credential  
 When the user enters the credentials to store, the extension would encrypt the password entered using the public key (stored in chrome storage) and then send request to the backend to store this decrypted password in the database. This way our password is securely saved in the database.  
-###2. View encrypted passwords  
+### 2. View encrypted passwords  
 By default, the passwords for all credentials are not shown. We are just showing "*****" instead of the password because the password is anyway encrypted at this time. If a user wants to view a password, he would click on the reveal icon beside the asteriks. Clicking on the reveal icon would trigger the extension and the extension would decrypt the password using the private key and show the decrypted password on the UI.
-###3. Share a credential
+### 3. Share a credential
 We also provide the functionality for the users to share their credentials with different people registered on our portal. When the user selects the people he wanted to shre the credential with, our system would use the selected people's public keys to encrypt the password and store it in the database. Now, if the other person logs in to see the password shared with him, his private key would be used to decrypt the password and view it.  
 
 Other functionalities that thought of but couldn't complete due to time constraints are:  
@@ -81,30 +81,32 @@ Other functionalities that thought of but couldn't complete due to time constrai
 
 ## Sequence Diagrams
 
-###1. Signup
+### 1. Signup
 
 When the user clicks on the signup button on our web application, he is redirected to the signup screen. Here, the user enters the name, email address, phone number and password and clicks the submit button. On this button click, our application sends a post request to the server with the given name, email, phone number and passwords. The Server checks in the database if a user already exists for this email address or not. If this email address already exists in the database, the server sends a response that this user already exists and this error message gets displayed on the UI. Otherwise, server creates a new user in the database and sends a success response to the web application and this success message gets displayed on the UI.
 ![signup](https://user-images.githubusercontent.com/92238381/218239655-d7695632-3087-4dbc-a98a-c521da58a48e.png)
 
-###2. Login
+### 2. Login
 
 The user enters the email and password on the signup screen and clicks the submit button. On this button click, our web application sends a POST request to the server with the given email and password in the body. The server checks in the db if the user exists with the given credentials or not. If user not found, server sends an error response to the web application and this error message gets displayed on the UI. If user with the given credentials exists in the database, the server sends a success response back to the web application and the user gets redirected to the main screen.
 ![Login sequence diagram](https://user-images.githubusercontent.com/46633374/218240463-e12d3dfb-8ed1-4158-990e-fbf7e6f6fab7.png)
 
 
-###3. View all Credentials
+### 3. View all Credentials
 After logging in successfully, if the user has not downloaded the extension, he is shown the page from where he can download the extension. Otherwise, the user is shown the main screen where he can see all of his stored credentials.
 ![Extension](https://user-images.githubusercontent.com/92238381/224171786-747d696e-cc05-41e0-b2b2-f9cf2f94a28d.png)
 
 
-###4. Create Credential
+### 4. Create Credential
 
 After logging in successfully, the user lands on the main screen where he gets the option to add a credential. Credential contains the name, username, password, and url. When the user clicks on the create button, he is shown the pop up to add name, password, url and username. When the user clicks on the submit button, the extension comes into play. The extension decrypts the entered password and then this decrypted password along with the name, username, and url is sent to the server which stores this is the database.
 ![CreateCredential](https://user-images.githubusercontent.com/92238381/224171725-cdbc7d5d-7238-4a3e-a240-1495b9bf524a.png)
 
-###5. Reveal Password
+### 5. Reveal Password
 When the user clicks on the reveal icon to see the password for that particular credential, the extension uses the private key of the user stored in the chrome storage to decrypt the password and then displays the decrypted password on the UI.
-###6. Share Credential
+![reveal password](https://user-images.githubusercontent.com/92238381/231266399-37868465-d1b1-4a98-820d-991b43978906.png)
+
+### 6. Share Credential
 If a user wants to share a crendtial with someone, he would click on the share button for that credential. Doing so would open a pop up from where the user can select the people he wants to share the credential with. When the user clicks on the submit button after selecting the people, the extension uses the public keys of the people selected and ecrypts the password using those for each selected person and sends request to the server to store the encrypted password.
 
 # Impacts
