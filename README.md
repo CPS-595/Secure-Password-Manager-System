@@ -154,7 +154,7 @@ Duration: 01/09/2023 - 02/4/2023
 
 ### Sprint 1
 
-Duration: 02/05/2023 - 03/11/2023
+Duration: 02/05/2023 - 02/15/2023
 
 #### Completed Tasks:  
 
@@ -162,6 +162,35 @@ Duration: 02/05/2023 - 03/11/2023
 2. UI for Signup Page
 3. Endpoints for Login and Signup
 4. Endpoint to show all the resources of a logged in user
-5. Endpoint to create a resource
-6. UI to see all the resources of a logged in user
 
+### Sprint 2
+
+Duration: 02/15/2023 - 02/28/2023
+
+#### Completed Tasks:  
+
+1. Endpoint to view all resources of a logged in user
+2. Endpoint to create a resource
+3. UI to see all the resources of a logged in user
+4. UI to create credential
+
+### Sprint 3
+
+Duration: 03/01/2023 - 03/30/2023
+
+#### Completed Tasks:  
+
+1. Extension that generates the private-public key pair for the user and stores them on the chrome storage.
+2. Extension encrypts the password entered by the user
+3. Web portal sends request to server to store the credential
+4. Endpoint decrypts the password using the private key 
+
+### Sprint 4
+
+Duration: 04/01/2023 - 04/30/2023
+
+#### Completed Tasks:  
+
+1. Endpoint to share credential
+2. UI to share credential
+3. Extension encrypts the password for all the selected users using their public keys
