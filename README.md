@@ -27,6 +27,8 @@ Instructor(s):
 | 01/19/2023 |  0.0          |            Init draft                       |
 | 01/31/2023 |  0.5          |  How to run and test this microservice      |
 | 02/10/2023 |  1.0          |  Updated with use case and Sequence Diagram |
+| 03/6/2023 |  1.5          |  Added more sequence diagrams and their descriptions |
+| 04/11/2023 |  2.0         |  Finalized the report |
 
 
 # Project Management Information
@@ -42,7 +44,7 @@ Source code for Extension (private access): <https://github.com/CPS-595/Extensio
 
 # Overview
  
-The idea is to build a secure web application where users can store and share their passwords for different urls.
+The idea is to build a secure web application where users can store, view and share their passwords for different domains.
 
 Every person or organization has multiple accounts over various web platforms like Gmail, MongoDB, Facebook or even their wifi password. Remembering all the passwords across different platforms can be a problem especially when it comes to organizations as they need to share passwords among team members. 
 
@@ -51,62 +53,71 @@ The intended password manager system would allow team members to store and share
 
 # Project Context and Scope
 
-The project was introducted to us by Novobi, a Software Company in Texas but the reason why we chose to work on this project was that whenever we used to enter credentials to any website, google chrome used to ask us "Do you want to save your credentials?" and once you save your credentials you can direclty just click on the password section and the password was autofilled by the chrome. We often wondered if we could work on building something like this and that when we though of building this project.
-
-So far the project is in its development stage Sprint 1. So far we have built a website along with database connectivity to store credentials.Futhermore, we are working on securely storing the password in Database by encrypting it and also we are trying to use passphrase for authentication. For session management we are using AWT tokens. 
-
+The project was introducted to us by Novobi, a Software Company in Texas but the reason why we chose to work on this project was that it was difficult to remember passwords for every website and if we write down the passwords somewhere, then there are security concerns as someone can steal the passwords. So, to address this issue, we chose this project so we can store, view and share our credentials secirely.
 
 
 # System Analysis
 
-A rough design of the website that we planned to build will include a portal that will allow the user to add a chrome extension on the user browser which will generate and store the private key. Anytime the password needs to be reveal or store the public key would be used to encrypt the password and store in the database while private would be used to decrypt and reveal the password. 
-
-Everytime the user is comes back to the portal or the browser after few minutes if inactivity, the user will be asked to enter the passphrase which he stored after logging in.
-
-
+We have created a web portal where users can sign up. After signup, the user would be asked to download the chrome extension that we have built. Once the user downloads the extension, a private and public key pair would be generated for this user which would be stored in ther chrome storage. After that, the user will be able to use different features of our web portal.
 ## High-level Requirements
 
-The prototype has been made and currently the main website is being built on it so far the we are working on the authentication part but in the coming sprints we would be building an extension to enable encryption and decrpytion via  public and private keys.
+Our sytem has 3 main functionalities that we have been able to successfully finish so far:  
+### 1. Create a credential  
+When the user enters the credentials to store, the extension would encrypt the password entered using the public key (stored in chrome storage) and then send request to the backend to store this decrypted password in the database. This way our password is securely saved in the database.  
+### 2. View encrypted passwords  
+By default, the passwords for all credentials are not shown. We are just showing "*****" instead of the password because the password is anyway encrypted at this time. If a user wants to view a password, he would click on the reveal icon beside the asteriks. Clicking on the reveal icon would trigger the extension and the extension would decrypt the password using the private key and show the decrypted password on the UI.
+### 3. Share a credential
+We also provide the functionality for the users to share their credentials with different people registered on our portal. When the user selects the people he wanted to shre the credential with, our system would use the selected people's public keys to encrypt the password and store it in the database. Now, if the other person logs in to see the password shared with him, his private key would be used to decrypt the password and view it.  
+
+Other functionalities that thought of but couldn't complete due to time constraints are:  
+- Edit a credential
+- Delete a credntial
+- Read/Write access while sharing a password
 
 ## Use Case Diagram
-![use case diagram](https://user-images.githubusercontent.com/92238381/218239606-9150c546-5f81-4839-9aa3-e00bc47988a3.png)
+<img width="572" alt="Screenshot 2023-04-11 at 2 58 10 PM" src="https://user-images.githubusercontent.com/92238381/231265329-dc3be1b4-5f0b-435a-896b-eb049d29c5ba.png">
 
 
-## Sequence Diagram
 
-1. Signup
+## Sequence Diagrams
+
+### 1. Signup
 
 When the user clicks on the signup button on our web application, he is redirected to the signup screen. Here, the user enters the name, email address, phone number and password and clicks the submit button. On this button click, our application sends a post request to the server with the given name, email, phone number and passwords. The Server checks in the database if a user already exists for this email address or not. If this email address already exists in the database, the server sends a response that this user already exists and this error message gets displayed on the UI. Otherwise, server creates a new user in the database and sends a success response to the web application and this success message gets displayed on the UI.
 ![signup](https://user-images.githubusercontent.com/92238381/218239655-d7695632-3087-4dbc-a98a-c521da58a48e.png)
 
-2. Login
+### 2. Login
 
 The user enters the email and password on the signup screen and clicks the submit button. On this button click, our web application sends a POST request to the server with the given email and password in the body. The server checks in the db if the user exists with the given credentials or not. If user not found, server sends an error response to the web application and this error message gets displayed on the UI. If user with the given credentials exists in the database, the server sends a success response back to the web application and the user gets redirected to the main screen.
 ![Login sequence diagram](https://user-images.githubusercontent.com/46633374/218240463-e12d3dfb-8ed1-4158-990e-fbf7e6f6fab7.png)
 
 
-3. View all Credentials
+### 3. View all Credentials
+After logging in successfully, if the user has not downloaded the extension, he is shown the page from where he can download the extension. Otherwise, the user is shown the main screen where he can see all of his stored credentials.
 ![Extension](https://user-images.githubusercontent.com/92238381/224171786-747d696e-cc05-41e0-b2b2-f9cf2f94a28d.png)
 
 
-4. Create Credential
+### 4. Create Credential
 
-After loggin in successfully, the user lands on the main screen where he gets the option to add a resource. Resource is basically the password that the user needs to store. Resource contains the name, password, url and the name of the user who created this. When the user clicks on the create button, he is shown the pop up to add name, password, url and username. After adding this information, user is asked to enter the account password for verification. All this information entered by the user is sent to the server. The server first verifies if correct account password is entered or not. If the account password is correct, server creates a resource in the database and sends success response to the web application. Otherwise, it sends an error message to the web application that the account password is incorrect.
+After logging in successfully, the user lands on the main screen where he gets the option to add a credential. Credential contains the name, username, password, and url. When the user clicks on the create button, he is shown the pop up to add name, password, url and username. When the user clicks on the submit button, the extension comes into play. The extension decrypts the entered password and then this decrypted password along with the name, username, and url is sent to the server which stores this is the database.
 ![CreateCredential](https://user-images.githubusercontent.com/92238381/224171725-cdbc7d5d-7238-4a3e-a240-1495b9bf524a.png)
+
+### 5. Reveal Password
+When the user clicks on the reveal icon to see the password for that particular credential, the extension uses the private key of the user stored in the chrome storage to decrypt the password and then displays the decrypted password on the UI.
+![reveal password](https://user-images.githubusercontent.com/92238381/231266399-37868465-d1b1-4a98-820d-991b43978906.png)
+
+### 6. Share Credential
+If a user wants to share a crendtial with someone, he would click on the share button for that credential. Doing so would open a pop up from where the user can select the people he wants to share the credential with. When the user clicks on the submit button after selecting the people, the extension uses the public keys of the people selected and ecrypts the password using those for each selected person and sends request to the server to store the encrypted password.
+![share credential](https://user-images.githubusercontent.com/92238381/231269062-9e251f12-b495-4d4a-b947-4e0fcd33b3fe.png)
+
 
 # Impacts
 
-We have planned to use MERN stack (MongoDB, Express, React, NodeJS) to develop this project. So far the project is not completely developed to determine its impacts.
+By working on this project, we got to learn a lot of things. We were not familiar with React JS before but we learnt React JS for this project to build the frontend. Also, we had never developed a chrome extension before. We learnt how a chrome extension works and created it. Other than that, we got the basic idea of how the encryption and decryption works and we implemented it using RSA Algorithm.
 
+Overall, this project proved very beneficial for us as it enhanced our knowledge and technical skill set.
 
-# Software Process Management
-
-
-We have used AGILE methodology to divide the project into 5 sprints. Currently we are in the Development Stage sprint 1.
-
-The Trello would have a weekly task and they would be updated everytime a task is completed. 
-
-## How to Run and test the project
+# How to Run and test the project
 
 1. Make sure you have git installed via <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>
 2. Install node js for your Operating system by following the instructions on this link :<https://nodejs.org/en/download/package-manager>
@@ -143,7 +154,7 @@ Duration: 01/09/2023 - 02/4/2023
 
 ### Sprint 1
 
-Duration: 02/05/2023 - 03/11/2023
+Duration: 02/05/2023 - 02/15/2023
 
 #### Completed Tasks:  
 
@@ -151,6 +162,35 @@ Duration: 02/05/2023 - 03/11/2023
 2. UI for Signup Page
 3. Endpoints for Login and Signup
 4. Endpoint to show all the resources of a logged in user
-5. Endpoint to create a resource
-6. UI to see all the resources of a logged in user
 
+### Sprint 2
+
+Duration: 02/15/2023 - 02/28/2023
+
+#### Completed Tasks:  
+
+1. Endpoint to view all resources of a logged in user
+2. Endpoint to create a resource
+3. UI to see all the resources of a logged in user
+4. UI to create credential
+
+### Sprint 3
+
+Duration: 03/01/2023 - 03/30/2023
+
+#### Completed Tasks:  
+
+1. Extension that generates the private-public key pair for the user and stores them on the chrome storage.
+2. Extension encrypts the password entered by the user
+3. Web portal sends request to server to store the credential
+4. Endpoint decrypts the password using the private key 
+
+### Sprint 4
+
+Duration: 04/01/2023 - 04/30/2023
+
+#### Completed Tasks:  
+
+1. Endpoint to share credential
+2. UI to share credential
+3. Extension encrypts the password for all the selected users using their public keys
