@@ -43,8 +43,6 @@ function Tables() {
   const [showModal, setShowModal] = useState(false);
 
   const showPassword = (index) => {
-    console.log("in show password", index);
-    console.log("in show password", datas);
     setShowModal(true);
     const rws = [];
     const payload = datas;
@@ -126,7 +124,6 @@ function Tables() {
         ),
       });
     }
-    console.log("rws", rws);
     setRows(rws);
   };
   const prepareData = (dataGot) => {
@@ -178,7 +175,6 @@ function Tables() {
         ),
       });
     }
-    console.log("rws", rws);
     setColumns(cols);
     setRows(rws);
   };
@@ -193,7 +189,6 @@ function Tables() {
         const response = await axiosPrivate.get("/resources", {
           signal: controller.signal,
         });
-        console.log(response.data);
         if (isMounted) {
           setDatas(response.data.payload);
           prepareData(response.data.payload);

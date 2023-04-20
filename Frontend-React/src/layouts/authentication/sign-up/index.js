@@ -92,7 +92,6 @@ function Cover() {
           JSON.stringify({ email, password, name, number }),
           { headers: { "Content-Type": "application/json" }, withCredentials: true }
         );
-        console.log(JSON.stringify(response?.data));
         //  console.log(JSON.stringify(response));
         // const accessToken = response?.data?.accessToken;
         // const user = response?.data?.user;

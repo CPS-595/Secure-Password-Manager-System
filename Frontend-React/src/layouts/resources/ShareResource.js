@@ -44,6 +44,8 @@ import useAxiosPrivate from "hooks/useAxiosPrivate";
 function NewResource({ showModal, setShowModal, openSuccessSB }) {
   const axiosPrivate = useAxiosPrivate();
   const [options, setOptions] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState([]);
 
   const reset = () => {
     setShowModal(false);
@@ -51,6 +53,16 @@ function NewResource({ showModal, setShowModal, openSuccessSB }) {
     openSuccessSB();
   };
 
+  const shareUsers = () => {
+    console.log("select Users", selectedUsers);
+    console.log("All users", users);
+    
+  };
+  const handleChange = (inputValue) => {
+    setSelectedUsers(inputValue);
+    console.log("in handlechange", users);
+    console.log("select user", inputValue);
+  };
   useEffect(async () => {
     console.log("in effect");
     try {
@@ -60,6 +72,7 @@ function NewResource({ showModal, setShowModal, openSuccessSB }) {
       });
       console.log("User data from post request", response?.data);
       if (response?.data.status === "Success") {
+        setUsers(response?.data.payload);
         const userEmails = [];
         for (let i = 0; i < response?.data.payload.length; i += 1) {
           userEmails.push({
@@ -90,6 +103,7 @@ function NewResource({ showModal, setShowModal, openSuccessSB }) {
           className="basic-multi-select"
           classNamePrefix="select"
           placeholder="Select users..."
+          onChange={handleChange}
         />
         <br />
         <MDBox width="100%" display="flex">
@@ -97,7 +111,7 @@ function NewResource({ showModal, setShowModal, openSuccessSB }) {
             Cancel
           </MDButton>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <MDButton id="create" variant="gradient" color="info">
+          <MDButton id="share" variant="gradient" color="info" onClick={shareUsers}>
             Share
           </MDButton>
         </MDBox>

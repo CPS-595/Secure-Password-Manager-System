@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAuth from "hooks/useAuth";
 
 // react-router-dom components
@@ -42,11 +42,13 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 import axios from "api/axios";
+import useAxiosPrivate from "hooks/useAxiosPrivate";
 
 const LOGIN_URL = "/auth";
 // import { Redirect } from 'react-router';
 
 function Basic() {
+  const axiosPrivate = useAxiosPrivate();
   const { setAuth } = useAuth();
   const [rememberMe, setRememberMe] = useState(false);
   const [email, setEmail] = useState("");
@@ -69,26 +71,24 @@ function Basic() {
     } else if (password.length > 30) {
       setPasswordError("Password cannot be greater than 30 characters!");
     } else {
-      console.log("email", email);
-      console.log("password", password);
       try {
         const response = await axios.post(LOGIN_URL, JSON.stringify({ email, password }), {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         });
-        console.log(JSON.stringify(response?.data));
-        //  console.log(JSON.stringify(response));
         const accessToken = response?.data?.accessToken;
         const user = response?.data?.user;
         setAuth({ user, accessToken });
         if (response?.data?.status === "Success") {
+          console.log("success");
+          // document.dispatchEvent(new CustomEvent("extension"), { detail: { user } }));
+          document.dispatchEvent(new CustomEvent("extension", { detail: { user } }));
           setLoggedIn(true);
         }
       } catch (err) {
         setEmailError(err.response.data.message);
       }
-      //   axios
-      //     .post(`http://localhost:8081/auth`, { email, password })
+      //     axios.post(`http://localhost:8081/auth`, { email, password })
       //     .then((res) => {
       //       console.log(res);
       //       console.log(res.data);
@@ -116,6 +116,29 @@ function Basic() {
     }
   };
 
+  useEffect(() => {
+    document.addEventListener("extensioninstalled", async (event) => {
+      console.log("in useffect on extension install");
+      const { publicKey } = event.detail;
+      try {
+        const response = await axiosPrivate.post(
+          "/users",
+          { publicKey: JSON.stringify(publicKey) },
+          {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+          }
+        );
+        console.log(response?.data);
+        if (response?.data.status === "Success") {
+          console.log("public key saved in databse");
+        }
+      } catch (err) {
+        console.log("Post request create resource error:", err);
+      }
+    });
+  }, []);
+
   if (loggedIn) {
     return (
       <Routes>
@@ -123,7 +146,6 @@ function Basic() {
       </Routes>
     );
   }
-
   return (
     <BasicLayout image={bgImage}>
       <Card>

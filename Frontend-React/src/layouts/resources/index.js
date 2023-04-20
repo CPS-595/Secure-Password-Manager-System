@@ -122,7 +122,6 @@ function Resources() {
         ),
       });
     }
-    console.log("rws", rws);
     setColumns(cols);
     setRows(rws);
   };
@@ -130,7 +129,6 @@ function Resources() {
   const getResources = async () => {
     try {
       const response = await axiosPrivate.get("/resources");
-      console.log(response.data);
       prepareData(response.data.payload);
     } catch (err) {
       console.error(err);

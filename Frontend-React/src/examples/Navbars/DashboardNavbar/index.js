@@ -59,7 +59,6 @@ function DashboardNavbar({ absolute, light, isMini }) {
   // const [openMenu, setOpenMenu] = useState(false);
   const route = useLocation().pathname.split("/").slice(1);
   const { auth } = useAuth();
-  console.log("auth from dashboard", auth);
   useEffect(() => {
     // Setting the navbar type
     if (fixedNavbar) {
