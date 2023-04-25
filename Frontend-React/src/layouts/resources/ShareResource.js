@@ -41,7 +41,7 @@ import PropTypes from "prop-types";
 
 import useAxiosPrivate from "hooks/useAxiosPrivate";
 
-function NewResource({ showModal, setShowModal, openSuccessSB }) {
+function NewResource({ showModal, setShowModal, openSuccessSB, sharePassword }) {
   const axiosPrivate = useAxiosPrivate();
   const [options, setOptions] = useState([]);
   const [users, setUsers] = useState([]);
@@ -54,16 +54,50 @@ function NewResource({ showModal, setShowModal, openSuccessSB }) {
   };
 
   const shareUsers = () => {
-    console.log("select Users", selectedUsers);
-    console.log("All users", users);
-    
+    let array = [];
+    array = selectedUsers.map((obj) => {
+      const index = users.findIndex((el) => el.email === obj.label);
+      const { publicKey, id, email } = index !== -1 ? users[index] : {};
+      return {
+        id,
+        email,
+        publicKey,
+      };
+    });
+    document.dispatchEvent(
+      new CustomEvent("shareResource", {
+        detail: {
+          array,
+          password: sharePassword,
+        },
+      })
+    );
+    console.log("shareUsers", array);
+    console.log("Shared Passwords", sharePassword);
   };
+
   const handleChange = (inputValue) => {
     setSelectedUsers(inputValue);
     console.log("in handlechange", users);
     console.log("select user", inputValue);
   };
   useEffect(async () => {
+    document.addEventListener("addcredential", async (event) => {
+      console.log("add credentials for this user", event.detail);
+      try {
+        const response = await axiosPrivate.post("/users/share", JSON.stringify(event.detail), {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        });
+        console.log(response?.data);
+        if (response?.data.status === "Success") {
+          reset();
+          // openSuccessSB();
+        }
+      } catch (err) {
+        console.log("Post request create resource error:", err);
+      }
+    });
     console.log("in effect");
     try {
       const response = await axiosPrivate.get("/users", {
@@ -124,6 +158,7 @@ NewResource.defaultProps = {
   showModal: false,
   setShowModal: null,
   openSuccessSB: null,
+  sharePassword: null,
 };
 
 // Typechecking props for the Header
@@ -131,6 +166,7 @@ NewResource.propTypes = {
   showModal: PropTypes.bool,
   setShowModal: PropTypes.func,
   openSuccessSB: PropTypes.func,
+  sharePassword: PropTypes.objectOf(PropTypes.object),
 };
 
 export default NewResource;

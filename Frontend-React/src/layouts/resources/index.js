@@ -45,6 +45,7 @@ function Resources() {
   const [createModal, setCreateModal] = useState(false);
   const [createModalShare, setCreateShareModal] = useState(false);
   const [seePassword, setSeePassword] = useState({});
+  const [sharePassword, setSharePassword] = useState({});
   const seePasswordReff = useRef(seePassword);
 
   const showPassword = (password, id) => {
@@ -74,6 +75,11 @@ function Resources() {
       // temp[id] = !seePasswordReff.current[id];
       setSeePassword(temp);
     }
+  };
+
+  const passwordShare = (pass, id) => {
+    setCreateShareModal(true);
+    setSharePassword({ id, password: pass });
   };
 
   const prepareData = (dataGot) => {
@@ -115,7 +121,7 @@ function Resources() {
             variant="outlined"
             size="small"
             color="black"
-            onClick={() => setCreateShareModal(true)}
+            onClick={() => passwordShare(dataGot[i].password, dataGot[i].id)}
           >
             Share
           </MDButton>
@@ -246,6 +252,7 @@ function Resources() {
                 showModal={createModalShare}
                 setShowModal={toggleCreateShareModal}
                 openSuccessSB={openSuccessSB}
+                sharePassword={sharePassword}
               />
               {renderSuccessSB}
               <MDBox pt={3}>
