@@ -31,7 +31,7 @@ import Select from "react-select";
 // import DataTable from "examples/Tables/DataTable";
 // import Icon from "@mui/material/Icon";
 // // import IconButton from "@mui/material/IconButton";
-
+import MDInput from "components/MDInput";
 import MDButton from "components/MDButton";
 
 // Data
@@ -45,7 +45,8 @@ function NewResource({ showModal, setShowModal, openSuccessSB, sharePassword }) 
   const axiosPrivate = useAxiosPrivate();
   const [options, setOptions] = useState([]);
   const [users, setUsers] = useState([]);
-  const [selectedUsers, setSelectedUsers] = useState([]);
+  // const [selectedUsers, setSelectedUsers] = useState([]);
+  const [publicKey, setPublicKey] = useState([]);
 
   const reset = () => {
     setShowModal(false);
@@ -54,30 +55,39 @@ function NewResource({ showModal, setShowModal, openSuccessSB, sharePassword }) 
   };
 
   const shareUsers = () => {
-    let array = [];
-    array = selectedUsers.map((obj) => {
-      const index = users.findIndex((el) => el.email === obj.label);
-      const { publicKey, id, email } = index !== -1 ? users[index] : {};
-      return {
-        id,
-        email,
-        publicKey,
-      };
-    });
-    document.dispatchEvent(
-      new CustomEvent("shareResource", {
-        detail: {
-          array,
-          password: sharePassword,
-        },
-      })
-    );
-    console.log("shareUsers", array);
-    console.log("Shared Passwords", sharePassword);
+    // let array = [];
+    // array = selectedUsers.map((obj) => {
+    //   const index = users.findIndex((el) => el.email === obj.label);
+    //   const { publicKey, id, email } = index !== -1 ? users[index] : {};
+    //   return {
+    //     id,
+    //     email,
+    //     publicKey,
+    //   };
+    // });
+    // document.dispatchEvent(
+    //   new CustomEvent("shareResource", {
+    //     detail: {
+    //       array,
+    //       password: sharePassword,
+    //     },
+    //   })
+    // );
+    // console.log("shareUsers", array);
+    // console.log("Shared Passwords", sharePassword);
   };
 
   const handleChange = (inputValue) => {
-    setSelectedUsers(inputValue);
+    // setSelectedUsers(inputValue);
+    const index = users.findIndex((el) => el.email === inputValue.label);
+    if (index !== -1) {
+      const user = {
+        publicKey: users[index].publicKey,
+        id: users[index].id,
+        email: users[index].email,
+      };
+      setPublicKey(JSON.stringify(user));
+    }
     console.log("in handlechange", users);
     console.log("select user", inputValue);
   };
@@ -130,9 +140,15 @@ function NewResource({ showModal, setShowModal, openSuccessSB, sharePassword }) 
       <MDBox component="form" role="form" style={{ margin: "30px" }}>
         <MDTypography variant="h4">Share Credential</MDTypography>
         <br />
+        <MDInput id="selected-user" type="text" value={publicKey} style={{ display: "none" }} />
+        <MDInput
+          id="encrypted-password"
+          type="text"
+          value={JSON.stringify(sharePassword)}
+          style={{ display: "none" }}
+        />
         <Select
           options={options}
-          isMulti
           name="colors"
           className="basic-multi-select"
           classNamePrefix="select"
@@ -141,7 +157,7 @@ function NewResource({ showModal, setShowModal, openSuccessSB, sharePassword }) 
         />
         <br />
         <MDBox width="100%" display="flex">
-          <MDButton variant="gradient" color="secondary" onClick={reset}>
+          <MDButton variant="gradient" color="secondary" onClick={() => setShowModal(false)}>
             Cancel
           </MDButton>
           &nbsp;&nbsp;&nbsp;&nbsp;
