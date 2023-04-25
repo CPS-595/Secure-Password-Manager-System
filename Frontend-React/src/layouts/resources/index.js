@@ -44,6 +44,7 @@ function Resources() {
   const [rows, setRows] = useState([]);
   const [createModal, setCreateModal] = useState(false);
   const [createModalShare, setCreateShareModal] = useState(false);
+  const [shareSuccessSB, setShareSuccessSB] = useState(false);
   const [seePassword, setSeePassword] = useState({});
   const [sharePassword, setSharePassword] = useState({});
   const seePasswordReff = useRef(seePassword);
@@ -146,6 +147,23 @@ function Resources() {
     getResources();
     setSuccessSB(true);
   };
+
+  const openShareSuccessSB = () => {
+    setShareSuccessSB(true);
+  };
+
+  const closeShareSuccessSB = () => setShareSuccessSB(false);
+  const renderShareSuccessSB = (
+    <MDSnackbar
+      color="success"
+      icon="check"
+      title="Credential Shared Successfully"
+      open={shareSuccessSB}
+      onClose={closeShareSuccessSB}
+      close={closeShareSuccessSB}
+      bgWhite
+    />
+  );
 
   const closeSuccessSB = () => setSuccessSB(false);
   const renderSuccessSB = (
@@ -251,10 +269,11 @@ function Resources() {
               <ShareResource
                 showModal={createModalShare}
                 setShowModal={toggleCreateShareModal}
-                openSuccessSB={openSuccessSB}
+                shareSuccessSB={openShareSuccessSB}
                 sharePassword={sharePassword}
               />
               {renderSuccessSB}
+              {renderShareSuccessSB}
               <MDBox pt={3}>
                 <DataTable
                   table={{ columns, rows }}

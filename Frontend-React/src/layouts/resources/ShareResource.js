@@ -41,7 +41,7 @@ import PropTypes from "prop-types";
 
 import useAxiosPrivate from "hooks/useAxiosPrivate";
 
-function NewResource({ showModal, setShowModal, openSuccessSB, sharePassword }) {
+function NewResource({ showModal, setShowModal, shareSuccessSB, sharePassword }) {
   const axiosPrivate = useAxiosPrivate();
   const [options, setOptions] = useState([]);
   const [users, setUsers] = useState([]);
@@ -51,8 +51,20 @@ function NewResource({ showModal, setShowModal, openSuccessSB, sharePassword }) 
   const reset = () => {
     setShowModal(false);
     document.getElementById("error").innerHTML = "";
-    openSuccessSB();
   };
+
+  // const closeShareSuccessSB = () => setShareeSuccessSB(false);
+  // const renderSuccessSB = (
+  //   <MDSnackbar
+  //     color="success"
+  //     icon="check"
+  //     title="Credential Created Successfully"
+  //     open={shareSuccessSB}
+  //     onClose={closeSuccessSB}
+  //     close={closeSuccessSB}
+  //     bgWhite
+  //   />
+  // );
 
   const shareUsers = () => {
     // let array = [];
@@ -102,7 +114,7 @@ function NewResource({ showModal, setShowModal, openSuccessSB, sharePassword }) 
         console.log(response?.data);
         if (response?.data.status === "Success") {
           reset();
-          // openSuccessSB();
+          shareSuccessSB();
         }
       } catch (err) {
         console.log("Post request create resource error:", err);
@@ -173,16 +185,16 @@ function NewResource({ showModal, setShowModal, openSuccessSB, sharePassword }) 
 NewResource.defaultProps = {
   showModal: false,
   setShowModal: null,
-  openSuccessSB: null,
   sharePassword: null,
+  shareSuccessSB: null,
 };
 
 // Typechecking props for the Header
 NewResource.propTypes = {
   showModal: PropTypes.bool,
   setShowModal: PropTypes.func,
-  openSuccessSB: PropTypes.func,
   sharePassword: PropTypes.objectOf(PropTypes.object),
+  shareSuccessSB: PropTypes.func,
 };
 
 export default NewResource;
