@@ -119,21 +119,31 @@ Overall, this project proved very beneficial for us as it enhanced our knowledge
 
 # How to Run and test the project
 
-1. Make sure you have git installed via <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>
-2. Install node js for your Operating system by following the instructions on this link :<https://nodejs.org/en/download/package-manager>
-3. Clone the login_signup_microservice repository <https://github.com/CPS-595/login_signup_microservice> and Secure Password Manager repository: <https://github.com/CPS-595/Secure-Password-Manager-System> by copying the link one by one.
+1. Make sure you have git installed via <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>.
+2. Install node js for your Operating system by following the instructions on this link :<https://nodejs.org/en/download/package-manager>.
+3. Clone the login_signup_microservice repository <https://github.com/CPS-595/login_signup_microservice>, Secure Password Manager repository <https://github.com/CPS-595/Secure-Password-Manager-System> and the Extension repositry https://github.com/CPS-595/Extension.
 
 <img width="1420" alt="Screenshot 2023-02-03 at 3 25 02 PM" src="https://user-images.githubusercontent.com/46633374/216703697-324f3102-fea1-4834-b21d-bc5b6ca9139c.png">
-4. Go to the cloned repository by entering "cd" followed by the path where you cloned the repository.
+4. Open the terminal and go to tlogin_signup_microservice by entering "cd" followed by the path where you cloned the repository.
 <img width="567" alt="Screenshot 2023-02-03 at 3 31 15 PM" src="https://user-images.githubusercontent.com/46633374/216704997-8aeeb140-e4da-4eb9-a4ff-93054b982154.png">
 
 5. Install all the dependencies via "npm install" command.
 
 <img width="566" alt="Screenshot 2023-02-03 at 3 33 39 PM" src="https://user-images.githubusercontent.com/46633374/216705517-9e5704ca-df48-4cb3-9c43-b38041c955f3.png">
 
-6. Do step 4 & 5 for the Secure-password-Manager-System Repository as well.
-7. Go the both repostories and enter command "npm start".
-8. Go https://localhost:3000 to access the wesbite.
+6. Open another terminal and repeat steps 4 & 5 for the Secure-password-Manager-System Repository as well.
+7. Enter the command "npm start" on both the terminals to start the server.
+8. Open Chrome browser and go to https://localhost:3000 to access the wesbite.
+9.  Open Extensions in the Chrome and click on Manage Extensions.
+<img width="1440" alt="Screenshot 2023-04-29 at 12 12 28 AM" src="https://user-images.githubusercontent.com/92238381/235283051-4463dbb6-a99c-4eed-acfd-9acbf0f0ab0b.png">
+
+11.  Turn the Developer mode on.
+<img width="1440" alt="Screenshot 2023-04-29 at 12 13 55 AM" src="https://user-images.githubusercontent.com/92238381/235283058-789e226a-a014-480e-989a-8cf803a56e99.png">
+
+12.  Click on Load unpacked and select the Extension repository that you cloned. 
+<img width="1440" alt="Screenshot 2023-04-29 at 12 14 14 AM" src="https://user-images.githubusercontent.com/92238381/235283060-0df8da4b-6f47-4ed4-922a-5b8ff51a669d.png">
+
+13.  You are all set to use our Secure Password Management System.
 
 
 
