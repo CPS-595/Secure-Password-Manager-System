@@ -7,12 +7,12 @@ Department of Computer Science
 
 Instructor(s):
 
-- Dr. Ahmed El Quadrihiri
+- Dr. Ahmed El Ouadrhiri
 - Dr. Phu Phung 
 
 ## Software Engineering Project I, Spring 2023
 
-# Secure Password Manager System
+# Project Title: Secure Password Manager System
 
 # Team members
 
