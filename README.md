@@ -30,7 +30,6 @@ Instructor(s):
 | 03/6/2023 |  1.5          |  Added more sequence diagrams and their descriptions |
 | 04/11/2023 |  2.0         |  Finalized the report |
 
-
 # Project Management Information
 
 Management board (private access): <https://trello.com/w/secure_password_manager_system>
@@ -41,7 +40,19 @@ Source code for Backend (private access): <https://github.com/CPS-595/login_sign
 
 Source code for Extension (private access): <https://github.com/CPS-595/Extension>
 
+## Table of Contents
 
+1. [ Overview ](#overview)
+2. [ Project Context and Scope ](#scope)
+3. [ System Analysis](#analysis)  
+	3.1. [ High-Level Requirements](#requirements)  
+	3.2. [ Use Case Diagram](#usecase)  
+	3.3. [ Sequence Diagrams](#sequence)  
+4. [ Impacts ](#impacts)
+5. [ How to run the project ](#run)
+6. [ Scrum Process ](#scrum)
+
+<a name="overview"></a>
 # Overview
  
 The idea is to build a secure web application where users can store, view and share their passwords for different domains.
@@ -50,15 +61,17 @@ Every person or organization has multiple accounts over various web platforms li
 
 The intended password manager system would allow team members to store and share credentials securely. For instance, the wifi password of your office, the administrator password of a router, or your organization's social media account password. It leverages encryption and decryption algorithms to encrypt and decrypt the secrets using public and private keys. This system would be implemented using a website to manage the passwords and a Chrome extension to store the private key on the browser and interact with the website to do the decryption.
 
-
+<a name="scope"></a>
 # Project Context and Scope
 
 The project was introducted to us by Novobi, a Software Company in Texas but the reason why we chose to work on this project was that it was difficult to remember passwords for every website and if we write down the passwords somewhere, then there are security concerns as someone can steal the passwords. So, to address this issue, we chose this project so we can store, view and share our credentials secirely.
 
-
+<a name="analysis"></a>
 # System Analysis
 
 We have created a web portal where users can sign up. After signup, the user would be asked to download the chrome extension that we have built. Once the user downloads the extension, a private and public key pair would be generated for this user which would be stored in ther chrome storage. After that, the user will be able to use different features of our web portal.
+
+<a name="requirements"></a>
 ## High-level Requirements
 
 Our sytem has 3 main functionalities that we have been able to successfully finish so far:  
@@ -74,11 +87,12 @@ Other functionalities that thought of but couldn't complete due to time constrai
 - Delete a credntial
 - Read/Write access while sharing a password
 
+<a name="usecase"></a>
 ## Use Case Diagram
 <img width="572" alt="Screenshot 2023-04-11 at 2 58 10 PM" src="https://user-images.githubusercontent.com/92238381/231265329-dc3be1b4-5f0b-435a-896b-eb049d29c5ba.png">
 
 
-
+<a name="sequence"></a>
 ## Sequence Diagrams
 
 ### 1. Signup
@@ -110,14 +124,15 @@ When the user clicks on the reveal icon to see the password for that particular 
 If a user wants to share a crendtial with someone, he would click on the share button for that credential. Doing so would open a pop up from where the user can select the people he wants to share the credential with. When the user clicks on the submit button after selecting the people, the extension uses the public keys of the people selected and ecrypts the password using those for each selected person and sends request to the server to store the encrypted password.
 ![share credential](https://user-images.githubusercontent.com/92238381/231269062-9e251f12-b495-4d4a-b947-4e0fcd33b3fe.png)
 
-
+<a name="impacts"></a>
 # Impacts
 
 By working on this project, we got to learn a lot of things. We were not familiar with React JS before but we learnt React JS for this project to build the frontend. Also, we had never developed a chrome extension before. We learnt how a chrome extension works and created it. Other than that, we got the basic idea of how the encryption and decryption works and we implemented it using RSA Algorithm.
 
 Overall, this project proved very beneficial for us as it enhanced our knowledge and technical skill set.
 
-# How to Run and test the project
+<a name="run"></a>
+# How to Run the project
 
 1. Make sure you have git installed via <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>.
 2. Install node js for your Operating system by following the instructions on this link :<https://nodejs.org/en/download/package-manager>.
@@ -146,7 +161,7 @@ Overall, this project proved very beneficial for us as it enhanced our knowledge
 13.  You are all set to use our Secure Password Management System.
 
 
-
+<a name="scrum"></a>
 ## Scrum process
 
 ### Sprint 0
