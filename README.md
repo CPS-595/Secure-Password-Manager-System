@@ -54,17 +54,13 @@ Source code for Extension (private access): <https://github.com/CPS-595/Extensio
 
 <a name="overview"></a>
 # Overview
- 
-The idea is to build a secure web application where users can store, view and share their passwords for different domains.
 
-Every person or organization has multiple accounts over various web platforms like Gmail, MongoDB, Facebook or even their wifi password. Remembering all the passwords across different platforms can be a problem especially when it comes to organizations as they need to share passwords among team members. 
-
-The intended password manager system would allow team members to store and share credentials securely. For instance, the wifi password of your office, the administrator password of a router, or your organization's social media account password. It leverages encryption and decryption algorithms to encrypt and decrypt the secrets using public and private keys. This system would be implemented using a website to manage the passwords and a Chrome extension to store the private key on the browser and interact with the website to do the decryption.
+The intended password manager system would allow team members to store and share credentials securely. For instance, the wifi password of your office, the administrator password of a router, or your organization's social media account password. It leverages encryption and decryption algorithms to encrypt and decrypt the secrets using public and private keys. This system would be implemented using a website to manage the passwords and a Chrome extension to store the private key on the browser and interact with the website to do the decryption. Thus, it provides end-to-end encryption for all stored data, which means that passwords and other sensitive information are encrypted on the user's device before they are transmitted to the server.
 
 <a name="scope"></a>
 # Project Context and Scope
 
-The project was introducted to us by Novobi, a Software Company in Texas but the reason why we chose to work on this project was that it was difficult to remember passwords for every website and if we write down the passwords somewhere, then there are security concerns as someone can steal the passwords. So, to address this issue, we chose this project so we can store, view and share our credentials secirely.
+Our Secure Password Management System is designed for teams and organizations. It can be used by a wide range of professionals, including software developers, IT administrators, project managers, and business owners. It is especially useful for teams as it allows them to securely store and share passwords. It is currently available as a website which can be run on any browser. Additionally, there is a browser extension for Chrome making the passwords secure.
 
 <a name="analysis"></a>
 # System Analysis
