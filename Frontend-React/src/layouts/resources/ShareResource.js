@@ -45,10 +45,11 @@ function NewResource({ showModal, setShowModal, shareSuccessSB, sharePassword })
   const axiosPrivate = useAxiosPrivate();
   const [options, setOptions] = useState([]);
   const [users, setUsers] = useState([]);
-  // const [selectedUsers, setSelectedUsers] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState(null);
   const [publicKey, setPublicKey] = useState([]);
 
   const reset = () => {
+    setSelectedUsers(null);
     setShowModal(false);
     document.getElementById("error").innerHTML = "";
   };
@@ -90,7 +91,7 @@ function NewResource({ showModal, setShowModal, shareSuccessSB, sharePassword })
   };
 
   const handleChange = (inputValue) => {
-    // setSelectedUsers(inputValue);
+    setSelectedUsers(inputValue);
     const index = users.findIndex((el) => el.email === inputValue.label);
     if (index !== -1) {
       const user = {
@@ -166,10 +167,11 @@ function NewResource({ showModal, setShowModal, shareSuccessSB, sharePassword })
           classNamePrefix="select"
           placeholder="Select users..."
           onChange={handleChange}
+          value={selectedUsers}
         />
         <br />
         <MDBox width="100%" display="flex">
-          <MDButton variant="gradient" color="secondary" onClick={() => setShowModal(false)}>
+          <MDButton variant="gradient" color="secondary" onClick={reset}>
             Cancel
           </MDButton>
           &nbsp;&nbsp;&nbsp;&nbsp;
